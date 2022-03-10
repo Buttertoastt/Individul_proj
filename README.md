@@ -1,5 +1,5 @@
-# Assignment2
-Part 1 of chat bot:
+# Assignment3
+Part 2 of chat bot:
 
 [Table of Contents]
 
