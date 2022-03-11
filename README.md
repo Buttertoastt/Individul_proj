@@ -114,7 +114,7 @@ List of limitations (Work in progress)
 
 Contributors names and student numbers
 
-Joel Johnson (37794112)
+Joel Johnson 
 Mahir Rahman (71811509)
 Matthew Halim (12588786)
 Nikita Korobkin (13290333)
