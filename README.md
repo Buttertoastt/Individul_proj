@@ -14,7 +14,7 @@ Part 2 of chat bot:
 
 ## Description
 Book, movie and trivia chat bot
-![image](https://user-images.githubusercontent.com/60250054/157779128-42d0f302-ff42-411d-ba3f-61dc69dd0716.png)
+![image]![image](https://user-images.githubusercontent.com/60250054/157779181-1be28460-d13c-4ca5-a3ae-db72b4f99fb8.png)
 
 Chat bot for online library book suggestion, 
 console based: 
