@@ -13,7 +13,7 @@ Part 2 of chat bot:
 # Acknowledgments
 
 ## Description
-
+![Alt text](C:\Users\JJ\Desktop\5th year\COSC310\assignments\Assignment 3 flow chart.pdf
 Chat bot for online library book suggestion, 
 console based: 
 https://github.com/COSC-310-Team-27/Assignment2/tree/main/Console/src
