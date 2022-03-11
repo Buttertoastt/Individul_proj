@@ -16,11 +16,12 @@ public class ParseNLP {
         stanfordCoreNLP = Pipeline.getPipeline();
         coreDocument = new CoreDocument(input);
         stanfordCoreNLP.annotate(coreDocument);
-        sentenceList = coreDocument.sentences();
+
         coreLabelList = coreDocument.tokens();
     }
     public List<CoreSentence> getSentences(){
-        return this.sentenceList;
+        sentenceList = coreDocument.sentences();
+        return sentenceList;
     }
     public List<CoreLabel> getCoreLabelList() {
         return this.coreLabelList;
@@ -59,6 +60,9 @@ public class ParseNLP {
         }
         return stringList;
     }
+    //pos is the code which represents what the word is
+    //ie NN = Noun, singular or mass
+    //seeinfo_pos.txt
     public ArrayList<String> getPosList() {
         ArrayList<String> posList = new ArrayList<>();
         String pos = "";
