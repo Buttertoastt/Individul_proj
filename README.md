@@ -13,7 +13,7 @@ Part 2 of chat bot:
 # Acknowledgments
 
 ## Description
-![Alt text]![image](https://user-images.githubusercontent.com/60250054/157778594-63484b34-4043-4440-9b86-7ecc336240d6.png)
+![image](https://user-images.githubusercontent.com/60250054/157778594-63484b34-4043-4440-9b86-7ecc336240d6.png)
 Chat bot for online library book suggestion, 
 console based: 
 https://github.com/COSC-310-Team-27/Assignment2/tree/main/Console/src
