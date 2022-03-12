@@ -72,7 +72,17 @@ public class ChatBot {
 		}
 		return happy;
 	}
+	public void mainMenu(){
 
+	}
+
+	public void libraryMenu(){
+
+	}
+
+	public void galleryMenu(){
+
+	}
 	public void loopGeneraTitle(Person person,PCA pca, ArrayList<String> suggest,boolean last) {
 
 		Scanner sc = new Scanner(System.in);

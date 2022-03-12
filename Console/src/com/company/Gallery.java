@@ -23,6 +23,7 @@ public class Gallery {
     public void setMovieList(ArrayList<Movie> movieList) {
         this.movieList = movieList;
     }
+
     //Add movie to gallery return boolean value to caller.
     public boolean addMovie(String title, String genre, int year, double duration) {
         for (int i = 0; i < movieList.size(); i++) {
@@ -30,39 +31,50 @@ public class Gallery {
                 return false;
             }
         }
-        bookList.add(new Book(title,genre,pages,author));
+        movieList.add(new Movie(title,genre,year,duration));
         return true;
     }
     //Return arrayList of books by specific genre in library.
-    public ArrayList<Book> getGeneraList(String genera) {
-        ArrayList<Book> generaList = new ArrayList<>();
-        bookList = getBookList();
-        for (Book b:bookList) {
+    public ArrayList<Movie> getGeneraList(String genera) {
+        ArrayList<Movie> movieList = new ArrayList<>();
+        movieList = getMovieList();
+        for (Movie m:movieList) {
             if(b.getGenre().equalsIgnoreCase(genera)) { //Don't use == to compare strings in Java, please. Unless you're comparing if they're pointing to the same object.
-                generaList.add(b);
+                movieList.add(m);
             }
         }
-        return  generaList;
+        return  movieList;
     }
     //Return arrayList of books by specific author in library.
-    public ArrayList<Book> getAuthorList(String author) {
-        ArrayList<Book> authorList = new ArrayList<>();
-        for (Book b:bookList) {
-            if(b.getAuthor().equalsIgnoreCase(author))
-            {
-                authorList.add(b);
+    public ArrayList<Movie> getYearList(int y) {
+        ArrayList<Movie> movieList = new ArrayList<>();
+        movieList = getMovieList();
+        for (Movie m:movieList) {
+            if(m.getYear() == y) { //Don't use == to compare strings in Java, please. Unless you're comparing if they're pointing to the same object.
+                movieList.add(m);
             }
         }
-        return  authorList;
+        return  movieList;
+    }
+    //Return arrayList of books by specific author in library.
+    public ArrayList<Movie> getDurationlist(double d) {
+        ArrayList<Movie> movieList = new ArrayList<>();
+        movieList = getMovieList();
+        for (Movie m:movieList) {
+            if(m.getDuration() == d) {
+                movieList.add(m);
+            }
+        }
+        return  movieList;
     }
     //Return arrayList of strings of all authors in library.
     //Specially made for callers that requires a list instead of arraylist
     public String [] getAllGeneras() {
         String [] allgenres;
-        ArrayList<Book> genres = new ArrayList<>();
-        for (Book book :bookList) {
-            if(!checkDup(book, genres)){
-                genres.add(book);
+        ArrayList<Movie> genres = new ArrayList<>();
+        for (Movie m :movieList) {
+            if(!checkDup(m, genres)){
+                genres.add(m);
             }
         }
         allgenres = new String[genres.size()];
@@ -71,28 +83,19 @@ public class Gallery {
         }
         return allgenres;
     }
-    //Return arrayList of strings of all authors in library.
-    public ArrayList<String> getAllAuthors() {
-        ArrayList<String> authors = new ArrayList<>();
-        for (Book book :bookList) {
-
-            authors.add(book.getAuthor());
-        }
-        return authors;
-    }
     //Return arrayList of strings of book titles in library.
-    public ArrayList<String> getTitleList(ArrayList<Book> books) {
-        ArrayList<String> titles = new ArrayList<>();
-        for (Book book :books) {
-            titles.add(book.getTitle());
+    public ArrayList<Movie> getTitleList(ArrayList<Movie> movies) {
+        ArrayList<Movie> titles = new ArrayList<>();
+        for (Movie m :movies) {
+            titles.add(m.getTitle());
         }
         return titles;
     }
     //Return random book by genera to caller.
-    public Book getGeneraRand(String genera) {
-        ArrayList<Book> generaList = getGeneraList(genera);
+    public Movie getGeneraRand(String genera) {
+        ArrayList<Movie> generaList = getGeneraList(genera);
         int randNum = (int)(Math.random() * generaList.size());
-        Book rand = new Book();
+        Movie rand = new Movie();
         //System.out.println(generaList.size());
         if (generaList.size()>0) {
             rand = generaList.get(randNum);
@@ -100,7 +103,7 @@ public class Gallery {
         //System.out.println(rand.getBookDetails());
         return rand;
     }
-    //Return random book written by author to caller.
+    //Return random movie written by author to caller.
     public Book getAuthRand(String author) {
         ArrayList<Book> authorList = getAuthorList(author);
         int randNum = (int) (Math.random() * authorList.size());
@@ -121,7 +124,7 @@ public class Gallery {
 
     //Tostring of a book at given index.
     public String getMovieDetails(int i){
-        return "Title: " + movieList.get(i).getTitle() + "\t\tGenre: " + movieList.get(i).getGenre() + "\t\tYear: " + movieList.get(i).getYear()t()+ "\t\tDuration: " + movieList.get(i).getDuration();
+        return "Title: " + movieList.get(i).getTitle() + "\t\tGenre: " + movieList.get(i).getGenre() + "\t\tYear: " + movieList.get(i).getYear()+ "\t\tDuration: " + movieList.get(i).getDuration();
     }
     //Returns a string that is a list of all the book titles, in the array of books passed to method, to caller.
     public String listString(ArrayList<Book> books)  {
@@ -179,14 +182,14 @@ public class Gallery {
         }
         return b;
     }
-    public Book byTitle(String s){ //In the future return list, from which user can pick from.
-        Book b = new Book();
-        ArrayList<Book> temp = new ArrayList<Book>();
+    public Movie byTitle(String s){ //In the future return list, from which user can pick from.
+        Movie m = new Movie();
+        ArrayList<Movie> temp = new ArrayList<Movie>();
         int a = 1;
         int ran = 0;
-        for (int i = 0; i < getBookList().size(); i++) {
-            if(s.equalsIgnoreCase(getBookList().get(i).getTitle())){
-                temp.add(getBookList().get(i));
+        for (int i = 0; i < getMovieList().size(); i++) {
+            if(s.equalsIgnoreCase(getMovieList().get(i).getTitle())){
+                temp.add(getMovieList().get(i));
             }
         }
         if(temp.size()>0){

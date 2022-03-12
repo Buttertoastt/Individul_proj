@@ -46,6 +46,7 @@ public class Main {
         in = sc.nextLine();
 
         gate = 1;
+
         while(gate == 1){
             //System.out.println("1");
 
