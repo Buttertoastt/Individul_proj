@@ -34,7 +34,7 @@ public class Gallery {
         movieList.add(new Movie(title,genre,year,duration));
         return true;
     }
-    //Return arrayList of books by specific genre in library.
+    //Return arrayList of movies by specific genre in genre.
     public ArrayList<Movie> getGeneraList(String genera) {
         ArrayList<Movie> movieList = new ArrayList<>();
         movieList = getMovieList();
@@ -159,25 +159,6 @@ public class Gallery {
         }
         if(temp.size()>0){ //Necessary?
             //ran = (int) Math.round(Math.random()*temp.size());
-            b = temp.get(ran);
-        }
-        return b;
-    }
-    //Returns random book using the pages passed into method to caller.
-    public Book byPages(String s){ //In the future return list, from which user can pick from. And perhaps within a range of the inputted pages
-        Book b = new Book();
-        ArrayList<Book> temp = new ArrayList<Book>();
-        int a = 1;
-        int ran = 0;
-        int k = Integer.parseInt(s);
-        for (int i = 0; i < getBookList().size(); i++) {
-            if(k == getBookList().get(i).getPages()){
-                temp.add(getBookList().get(i));
-            }
-        }
-        if(temp.size()>0){
-            ran = (int) Math.random()*temp.size();
-            //System.out.println(ran);
             b = temp.get(ran);
         }
         return b;
