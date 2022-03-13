@@ -8,20 +8,23 @@ public class Gallery {
     private ArrayList<Movie> movieList = new ArrayList<>();
     public Gallery() {
         movieList.add(new Movie("Eternals", "Action", 2021, 2.62));
-        movieList.add(new Movie("dune", "Action", 2021, 2.58));
+        movieList.add(new Movie("Dune", "Sci-Fi", 2021, 2.58));
         movieList.add(new Movie("Perfect Blue", "Drama", 1998, 2));
         movieList.add(new Movie("Howl's Moving Castle - The Animation", "Fantasy", 2004, 2));
         movieList.add(new Movie("The Fellowship of The Rings", "Fantasy", 2001, 3));
         movieList.add(new Movie("Slender Man", "Horror", 2018, 1.6));
-
-
+        movieList.add(new Movie("Titanic", "Romance", 1997, 3));
+        movieList.add(new Movie("E.T", "Sci-Fi", 1982   , 2));
+        movieList.add(new Movie("Hathaway's Flash part 1", "Sci-Fi", 2021, 1.5));
+        movieList.add(new Movie("Scary movie", "Comedy", 2000, 1.5));
+        movieList.add(new Movie("LA 92", "Education", 2017, 2));
+    }
+    public void setMovieList(ArrayList<Movie> movieList) {
+        this.movieList = movieList;
     }
 
     public ArrayList<Movie> getMovieList() {
         return movieList;
-    }
-    public void setMovieList(ArrayList<Movie> movieList) {
-        this.movieList = movieList;
     }
 
     //Add movie to gallery return boolean value to caller.
@@ -34,23 +37,21 @@ public class Gallery {
         movieList.add(new Movie(title,genre,year,duration));
         return true;
     }
-    //Return arrayList of movies by specific genre in genre.
+    //Return arrayList of movies by specific genre in gallery.
     public ArrayList<Movie> getGeneraList(String genera) {
-        ArrayList<Movie> movieList = new ArrayList<>();
-        movieList = getMovieList();
+        ArrayList<Movie> movieList = getMovieList();
         for (Movie m:movieList) {
-            if(b.getGenre().equalsIgnoreCase(genera)) { //Don't use == to compare strings in Java, please. Unless you're comparing if they're pointing to the same object.
+            if(m.getGenre().equalsIgnoreCase(genera)) { //Don't use == to compare strings in Java, please. Unless you're comparing if they're pointing to the same object.
                 movieList.add(m);
             }
         }
         return  movieList;
     }
-    //Return arrayList of books by specific author in library.
+    //Return arrayList of books by specific year in gallery.
     public ArrayList<Movie> getYearList(int y) {
-        ArrayList<Movie> movieList = new ArrayList<>();
-        movieList = getMovieList();
+        ArrayList<Movie> movieList = getMovieList();
         for (Movie m:movieList) {
-            if(m.getYear() == y) { //Don't use == to compare strings in Java, please. Unless you're comparing if they're pointing to the same object.
+            if(m.getYear() == y) {
                 movieList.add(m);
             }
         }
@@ -58,8 +59,7 @@ public class Gallery {
     }
     //Return arrayList of books by specific author in library.
     public ArrayList<Movie> getDurationlist(double d) {
-        ArrayList<Movie> movieList = new ArrayList<>();
-        movieList = getMovieList();
+        ArrayList<Movie> movieList = getMovieList();
         for (Movie m:movieList) {
             if(m.getDuration() == d) {
                 movieList.add(m);
@@ -84,12 +84,19 @@ public class Gallery {
         return allgenres;
     }
     //Return arrayList of strings of book titles in library.
-    public ArrayList<Movie> getTitleList(ArrayList<Movie> movies) {
-        ArrayList<Movie> titles = new ArrayList<>();
+    public ArrayList<String> getTitleList(ArrayList<Movie> movies) {
+        ArrayList<String> titles = new ArrayList<>();
         for (Movie m :movies) {
             titles.add(m.getTitle());
         }
         return titles;
+    }
+    public ArrayList<Integer> getYearList(ArrayList<Movie> movies) {
+        ArrayList<Integer> years = new ArrayList<>();
+        for (Movie m :movies) {
+            years.add(m.getYear());
+        }
+        return years;
     }
     //Return random book by genera to caller.
     public Movie getGeneraRand(String genera) {
@@ -104,19 +111,19 @@ public class Gallery {
         return rand;
     }
     //Return random movie written by author to caller.
-    public Book getAuthRand(String author) {
-        ArrayList<Book> authorList = getAuthorList(author);
-        int randNum = (int) (Math.random() * authorList.size());
-        Book rand = new Book();
-        if (authorList.size() > 0) {
-            rand = authorList.get(randNum);
+    public Movie getYearRand(int year) {
+        ArrayList<Movie> yearList = getYearList(year);
+        int randNum = (int) (Math.random() * yearList.size());
+        Movie rand = new Movie();
+        if (yearList.size() > 0) {
+            rand = yearList.get(randNum);
         }
         return rand;
     }
     //Returns a random book in library to caller.
-    public Book getTitleRandom() {
-        int randNum = (int)(Math.random() * bookList.size());
-        Book rand = bookList.get(randNum);
+    public Movie getTitleRandom() {
+        int randNum = (int)(Math.random() * movieList.size());
+        Movie rand = movieList.get(randNum);
         return rand;
     }
 
@@ -127,15 +134,16 @@ public class Gallery {
         return "Title: " + movieList.get(i).getTitle() + "\t\tGenre: " + movieList.get(i).getGenre() + "\t\tYear: " + movieList.get(i).getYear()+ "\t\tDuration: " + movieList.get(i).getDuration();
     }
     //Returns a string that is a list of all the book titles, in the array of books passed to method, to caller.
-    public String listString(ArrayList<Book> books)  {
-        String bookString = "";
-        for (Book b:books) {
-            bookString += b.getTitle() + " \n";
+    public String listString(ArrayList<Movie> movies)  {
+        String movieString = "";
+        for (Movie m:movies) {
+            movieString += m.getTitle() + " \n";
         }
-        return bookString;
+        return movieString;
     }
     //Returns random book that is similar to user's favourite book
     //Incomplete and unused, held for future use.
+    /*
     public Book favB(Person p){
         Book b = new Book();
         int a = 1;
@@ -163,6 +171,7 @@ public class Gallery {
         }
         return b;
     }
+    */
     public Movie byTitle(String s){ //In the future return list, from which user can pick from.
         Movie m = new Movie();
         ArrayList<Movie> temp = new ArrayList<Movie>();
@@ -175,17 +184,16 @@ public class Gallery {
         }
         if(temp.size()>0){
             ran = (int) (Math.random()*temp.size());
-            b = temp.get(ran);
+            m = temp.get(ran);
         }
 
-        return b;
+        return m;
     }
-    //Checks for dupes in get all authors and get all genres methods
+    //Checks for dupes in get genre and year methods
     //Returns true if a duplicate is found and false otherwise
     public boolean checkDup(Movie in, ArrayList<Movie> out){
-
         for (int i = 0; i < out.size(); i++) {
-            if(in.getAuthor().equalsIgnoreCase(out.get(i).getAuthor()) || in.getGenre().equalsIgnoreCase(out.get(i).getGenre())){
+            if(in.getGenre().equalsIgnoreCase(out.get(i).getGenre()) || in.getYear() == out.get(i).getYear()){
                 return true;
             }
         }

@@ -73,14 +73,30 @@ public class ChatBot {
 		return happy;
 	}
 	public void mainMenu(){
-
+		System.out.println("Are you looking for book or movie recommendations today? (1 - book, 2 - movie 3 - other)");
+		Scanner in = new Scanner(System.in);
+		if(Integer.parseInt(in.nextLine())==1){
+			libraryMenu();
+		}
+		else if(Integer.parseInt(in.nextLine())==2){
+			galleryMenu();
+		}
+		else if(Integer.parseInt(in.nextLine())==3){
+			System.out.println("Handling other topics");////////////////////
+		}
+		else{
+			System.out.println("Unrecognized option, try again.");
+			mainMenu();
+		}
 	}
 
 	public void libraryMenu(){
+		System.out.println("Library menu");
 
 	}
 
 	public void galleryMenu(){
+		System.out.println("Gallery menu");
 
 	}
 	public void loopGeneraTitle(Person person,PCA pca, ArrayList<String> suggest,boolean last) {

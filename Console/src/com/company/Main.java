@@ -53,7 +53,7 @@ public class Main {
             if(in.equalsIgnoreCase("random title")){
                 System.out.println(chatBot.getStatement(13));
                 Book ran = library.getTitleRandom();
-                System.out.println(ran.getBookDetails());
+                //Moved to library related method: System.out.println(ran.getBookDetails());
                 //System.out.println(chatBot.getStatement(3));
                 if(chatBot.testReaction(sc.nextLine())){ //
                     user1.updateTempList(ran);
@@ -72,17 +72,21 @@ public class Main {
             else if(in.equalsIgnoreCase("title")){
                 System.out.println("Search by title: ");
                 Book ran = library.byTitle(sc.nextLine());
-                System.out.println(chatBot.getStatement(13));
-                System.out.println(ran.getBookDetails());
-                if(chatBot.testReaction(sc.nextLine())){ //
-                    user1.updateTempList(ran);
+                if(ran.getTitle() == null){
+                    System.out.println(chatBot.getStatement(8));
+                }
+                else{
+                    //System.out.println(chatBot.getStatement(3));
+                    System.out.println(chatBot.getStatement(13));
+                    System.out.println(ran.getBookDetails());
+                    if(chatBot.testReaction(sc.nextLine())){ //
+                        user1.updateTempList(ran);
+                    }
                 }
             }
             else if(in.equalsIgnoreCase("author")){
                 System.out.println("Search by author: ");
                 Book ran = library.getAuthRand(sc.nextLine());
-
-
                 if(ran.getTitle() == null){
                     System.out.println(chatBot.getStatement(9));
                 }
@@ -149,8 +153,13 @@ public class Main {
 
         }
         System.out.println(chatBot.getStatement(14));
-        for (int i = 0; i < user1.getTempList().size(); i++) {
-            System.out.println(user1.getTempList().get(i).getBookDetails());
+        if(user1.getTempList().size() > 0){
+            for (int i = 0; i < user1.getTempList().size(); i++) {
+                System.out.println(user1.getTempList().get(i).getBookDetails());
+            }
+        }
+        else{
+            System.out.println("No books checked out.");
         }
         System.out.println("We look forward to your next visit!");//Output templist or permlist? or something else.
 
