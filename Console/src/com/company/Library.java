@@ -193,7 +193,7 @@ public class Library {
     //Returns random book using the pages passed into method to caller.
     public Book byPages(String s){ //In the future return list, from which user can pick from. And perhaps within a range of the inputted pages
         Book b = new Book();
-        ArrayList<Book> temp = new ArrayList<Book>();
+        ArrayList<Book> temp = new ArrayList<>();
         int a = 1;
         int ran = 0;
         int k = Integer.parseInt(s);

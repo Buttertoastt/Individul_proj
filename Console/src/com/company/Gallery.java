@@ -39,33 +39,33 @@ public class Gallery {
     }
     //Return arrayList of movies by specific genre in gallery.
     public ArrayList<Movie> getGeneraList(String genera) {
-        ArrayList<Movie> movieList = getMovieList();
+        ArrayList<Movie> generaList = getMovieList();
         for (Movie m:movieList) {
             if(m.getGenre().equalsIgnoreCase(genera)) { //Don't use == to compare strings in Java, please. Unless you're comparing if they're pointing to the same object.
-                movieList.add(m);
+                generaList.add(m);
             }
         }
-        return  movieList;
+        return  generaList;
     }
-    //Return arrayList of books by specific year in gallery.
+    //Return arrayList of movies by specific year in gallery.
     public ArrayList<Movie> getYearList(int y) {
-        ArrayList<Movie> movieList = getMovieList();
-        for (Movie m:movieList) {
+        ArrayList<Movie> yearList = getMovieList();
+        for (Movie m: movieList) {
             if(m.getYear() == y) {
-                movieList.add(m);
+                yearList.add(m);
             }
         }
-        return  movieList;
+        return  yearList;
     }
     //Return arrayList of books by specific author in library.
-    public ArrayList<Movie> getDurationlist(double d) {
-        ArrayList<Movie> movieList = getMovieList();
+    public ArrayList<Movie> getDurationList(double d) {
+        ArrayList<Movie> durationList = getMovieList();
         for (Movie m:movieList) {
             if(m.getDuration() == d) {
-                movieList.add(m);
+                durationList.add(m);
             }
         }
-        return  movieList;
+        return  durationList;
     }
     //Return arrayList of strings of all authors in library.
     //Specially made for callers that requires a list instead of arraylist
