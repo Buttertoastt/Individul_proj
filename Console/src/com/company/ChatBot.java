@@ -18,11 +18,13 @@ public class ChatBot {
 	private String q5 = "What is your favorite genera?";
 	private String q6 = "What is your favorite book?";*/
 	Library library = new Library();
+	Scanner sc = new Scanner(System.in);
 	private String p1 = "yes";
 	private String p2 = "yeah";
 	private String p3 = "yep";
 	private String p4 = "yeet";
 	private String p5 = "sure";
+	private String p6 = "y";
 	private ArrayList<String> positiveFeedBack = new ArrayList<>();
 	private Person person;
 	private ArrayList<String> statements = new ArrayList<>();
@@ -44,7 +46,7 @@ public class ChatBot {
 		statements.add("Error, no books to return..."); //12
 		//statements.add("Are you a first time user?");
 		//statements.add("Welcome back %s how may I help you today?"); no need to output example of services statement b/c user is not new.
-		statements.add("May I suggest %s(type yes to add to checkout, otherwise type no): "); //13
+		statements.add("May I suggest %s(type yes/y to add to checkout, otherwise type no/n): "); //13
 		statements.add("Today you've checked out the following book(s): "); //14
 		statements.add("Book(s) successfully added to checkout!"); //15
 		questions.add(new question("generic", 0, "What is your name?")); //0
@@ -54,12 +56,13 @@ public class ChatBot {
 		questions.add(new question("generic", 0, "What is your favourite genre %s?")); //4
 		//questions.add(new question("generic", 0, "What service can I provide? "));  //considering to add two more elements, two to indicate the statement(s) index(s)
 		questions.add(new question("loop", 0, "What should I base my recommendation on? ")); //5
-		questions.add(new question("loop", 1, "Would you require additional service? (Type yes for more features)")); //6
+		questions.add(new question("loop", 1, "Would you require additional service? (Type yes/y for more features)")); //6
 		positiveFeedBack.add(p1);
 		positiveFeedBack.add(p2);
 		positiveFeedBack.add(p3);
 		positiveFeedBack.add(p4);
 		positiveFeedBack.add(p5);
+		positiveFeedBack.add(p6);
 
 	}
 	public boolean testReaction(String reply) {
@@ -72,7 +75,148 @@ public class ChatBot {
 		}
 		return happy;
 	}
+	public void mainMenu(Person p){
+		System.out.println("Are you looking for book or movie recommendations today? (1 - book, 2 - movie 3 - other)");
+		if(Integer.parseInt(sc.nextLine())==1){
+			libraryMenu(p);
+		}
+		else if(Integer.parseInt(sc.nextLine())==2){
+			galleryMenu(p);
+		}
+		else if(Integer.parseInt(sc.nextLine())==3){
+			System.out.println("Handling other topics");////////////////////
+		}
+		else{
+			System.out.println("Unrecognized option, try again.");
+			mainMenu(p);
+		}
+	}
 
+	public void libraryMenu(Person p){
+		String in = "";
+		System.out.println("Library menu");
+		PCA pca = new PCA(p.getUserVector());
+		Quiz quiz = new Quiz();
+
+		int gate = 1;
+		while(gate == 1){
+			//System.out.println("1");
+			System.out.println("1 - random title \n2 - random book in genre\n3 - Search by title\n4 - Random book by author\n5 - Search by pages\n6 - PCA\n7 - quiz \n8 - Get current checkout list");
+			in = sc.nextLine();
+			if(Integer.parseInt(in)==1){
+				System.out.println(getStatement(13));
+				Book ran = library.getTitleRandom();
+				//Moved to library related method: System.out.println(ran.getBookDetails());
+				//System.out.println(chatBot.getStatement(3));
+				if(testReaction(sc.nextLine())){ //
+					p.updateTempList(ran);
+				}
+				//System.out.println(user1.getTempList());
+			}
+			//Search by genre
+			else if(Integer.parseInt(in)==2){
+				System.out.println("Search by genre: ");
+				Book ran = library.getGeneraRand(sc.nextLine());
+				if(ran.getTitle() == null){
+					System.out.println(getStatement(10));
+				}
+				else{
+					//System.out.println(chatBot.getStatement(3));
+					System.out.println(getStatement(13));
+					System.out.println(ran.getBookDetails());
+					if(testReaction(sc.nextLine())){ //
+						p.updateTempList(ran);
+					}
+				}
+			}
+			//Search by title
+			else if(Integer.parseInt(in)==3){
+				System.out.println("Search by title: ");
+				Book ran = library.byTitle(sc.nextLine());
+				if(ran.getTitle() == null){
+					System.out.println(getStatement(8));
+				}
+				else{
+					System.out.println(getStatement(13));
+					System.out.println(ran.getBookDetails());
+					if(testReaction(sc.nextLine())){ //
+						p.updateTempList(ran);
+					}
+				}
+			}
+			//Search by author
+			else if(Integer.parseInt(in)==4){
+				System.out.println("Search by author: ");
+				Book ran = library.getAuthRand(sc.nextLine());
+				if(ran.getTitle() == null){
+					System.out.println(getStatement(9));
+				}
+				else{
+					//System.out.println(chatBot.getStatement(3));
+					System.out.println(getStatement(13));
+					System.out.println(ran.getBookDetails());
+					if(testReaction(sc.nextLine())){ //
+						p.updateTempList(ran);
+					}
+				}
+			}
+			//Search by pages
+			else if(Integer.parseInt(in)==5){
+				System.out.println("Search by pages: ");
+				Book ran = library.byPages(sc.nextLine());
+				if(ran.getTitle() == null){
+					System.out.println(getStatement(11));
+				}
+				else{
+					//System.out.println(chatBot.getStatement(3));
+					System.out.println(getStatement(13));
+					System.out.println(ran.getBookDetails());
+					if(testReaction(sc.nextLine())){ //
+						p.updateTempList(ran);
+					}
+				}
+			}
+			//Quiz/trivia
+			else if(Integer.parseInt(in)==6){
+				System.out.println("Quick questions!");
+				System.out.println("These potshots won't stop until you accept at least one genre!");
+				p.setUserVector();
+				p.setPcaVector(pca.getStandardUser());
+				//System.out.println("pass1");
+				p.setTopThree(pca.getTopThree());
+				//System.out.println("pass2");
+				loopGeneraTitle(p,pca,pca.getTopThree(), false);
+			}
+			else if(Integer.parseInt(in)==7){
+				quiz.play();
+			}
+			//Print cart list
+			else if(Integer.parseInt(in)==8){
+				System.out.println(p.getTempList().toString());
+			}
+
+			else{
+				System.out.println("Service unavailable");
+
+			}
+			System.out.println(getQuestion(6, p.getName()));
+			in = sc.nextLine();
+			//System.out.println("in: "+ in);
+			if(testReaction(in)){
+				continue;
+			}
+			else{
+				gate = 0;
+				break;
+			}
+		}
+
+	}
+
+	public void galleryMenu(Person p){
+		System.out.println("Gallery menu");
+
+	}
 	public void loopGeneraTitle(Person person,PCA pca, ArrayList<String> suggest,boolean last) {
 
 		Scanner sc = new Scanner(System.in);
