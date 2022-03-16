@@ -29,13 +29,13 @@ public class Main {
         user1.setName(parse.getWord());
         System.out.println(chatBot.getQuestion(1, user1.getName()));
         user1.setAge(parse.getWord());
+        /*
         System.out.println(chatBot.getQuestion(2, user1.getName()));
         user1.setOccupation(parse.getWord());
         System.out.println(chatBot.getQuestion(3, user1.getName()));
         user1.setFavoriteBook(sc.nextLine());
         System.out.println(chatBot.getQuestion(4, user1.getName()));
         user1.setFavoriteGenera(sc.nextLine());
-        /*
         user1.setUserVector();
         user1.setPcaVector(pca.getStandardUser());
         user1.setTopThree(pca.getTopThree());
@@ -47,14 +47,24 @@ public class Main {
         gate = 1;
 
         chatBot.mainMenu(user1);
-        System.out.println(chatBot.getStatement(14));
-        if(user1.getTempList().size() > 0){
-            for (int i = 0; i < user1.getTempList().size(); i++) {
-                System.out.println(user1.getTempList().get(i).getBookDetails());
+        if(user1.getTempBookList().size() > 0){
+            System.out.println(chatBot.getStatement(14));
+            for (int i = 0; i < user1.getTempBookList().size(); i++) {
+                System.out.println(user1.getTempBookList().get(i).getBookDetails());
             }
         }
         else{
             System.out.println("No books checked out.");
+        }
+        System.out.println("\n");
+        if(user1.getTempMovieList().size() > 0){
+            System.out.println(chatBot.getStatement(16));
+            for (int i = 0; i < user1.getTempMovieList().size(); i++) {
+                System.out.println(user1.getTempMovieList().get(i).getMovieDetails());
+            }
+        }
+        else{
+            System.out.println("No movies checked out.");
         }
         System.out.println("We look forward to your next visit!");//Output templist or permlist? or something else.
 
