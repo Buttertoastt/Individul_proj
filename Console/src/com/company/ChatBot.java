@@ -1,22 +1,10 @@
-package com.company;
 import java.util.*;
 
 public class ChatBot {
-/*	private String s1 = "Hello, my name is chat bot";
-	private String s2 = "May I suggest %s";
-	private String s3 = "Can I suggest something in our %s section?";
-
-	private String s4= "I'm sorry, maybe you could try %s ...?";
-	private String s5 = "Okay, let me find some %s books for you";
-	private String s6 = "I'm not sure I understand ...?";
-
-	private String q0 = "What is your name?";
-	private String q1 = "How old are you %s?";
-	private String q2 = "What is your occupation %s?";
-	private String q3 = "What is your favorite genera?";
-	private String q4 = "What is your favorite book?";
-	private String q5 = "What is your favorite genera?";
-	private String q6 = "What is your favorite book?";*/
+	private String browseMovies = "browse movies";
+	private String browseBooks = "browse books";
+	private String trivia = "trivia";
+	private String request = "request";
 	Library library = new Library();
 	Gallery gallery = new Gallery();
 	Scanner sc = new Scanner(System.in);

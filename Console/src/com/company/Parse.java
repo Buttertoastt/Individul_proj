@@ -1,5 +1,3 @@
-package com.company;
-
 import java.lang.reflect.Type;
 import java.text.NumberFormat;
 import java.text.ParseException;
