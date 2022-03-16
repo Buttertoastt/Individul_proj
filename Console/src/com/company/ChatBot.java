@@ -18,6 +18,7 @@ public class ChatBot {
 	private String q5 = "What is your favorite genera?";
 	private String q6 = "What is your favorite book?";*/
 	Library library = new Library();
+	Gallery gallery = new Gallery();
 	Scanner sc = new Scanner(System.in);
 	private String p1 = "yes";
 	private String p2 = "yeah";
@@ -49,6 +50,11 @@ public class ChatBot {
 		statements.add("May I suggest %s(type yes/y to add to checkout, otherwise type no/n): "); //13
 		statements.add("Today you've checked out the following book(s): "); //14
 		statements.add("Book(s) successfully added to checkout!"); //15
+		statements.add("Today you've checked out the following movie(s): "); //16
+		statements.add("Error, no movies in that genre..."); //17
+		statements.add("Error, no movies by that title..."); //18
+		statements.add("Error, no movies in that year..."); //19
+
 		questions.add(new question("generic", 0, "What is your name?")); //0
 		questions.add(new question("generic", 0, "How old are you %s?")); //1
 		questions.add(new question("generic", 0, "What is your occupation %s?")); //2
@@ -76,27 +82,37 @@ public class ChatBot {
 		return happy;
 	}
 	public void mainMenu(Person p){
-		System.out.println("Are you looking for book or movie recommendations today? (1 - book, 2 - movie 3 - other)");
-		if(Integer.parseInt(sc.nextLine())==1){
-			libraryMenu(p);
-		}
-		else if(Integer.parseInt(sc.nextLine())==2){
-			galleryMenu(p);
-		}
-		else if(Integer.parseInt(sc.nextLine())==3){
-			System.out.println("Handling other topics");////////////////////
-		}
-		else{
-			System.out.println("Unrecognized option, try again.");
-			mainMenu(p);
+		PCA pca = new PCA(p.getUserVector());
+		Quiz quiz = new Quiz();
+		int in = 0;
+		String input;
+		int gate = 1;
+		while(gate == 1) {
+			System.out.println("Are you looking for book or movie recommendations today? (1 - book, 2 - movie 3 - other)");
+			in = Integer.parseInt(sc.nextLine());
+			if (in == 1) {
+				libraryMenu(p, pca, quiz);
+			} else if (in == 2) {
+				galleryMenu(p);
+			} else if (in == 3) {
+				System.out.println("Handling other topics");////////////////////
+			} else {
+				System.out.println("Unrecognized option, try again.");
+				mainMenu(p);
+			}
+			System.out.println("Would you like to keep browsing?");
+			if (testReaction(sc.nextLine())) {
+				continue;
+			} else {
+				break;
+			}
 		}
 	}
 
-	public void libraryMenu(Person p){
+	public void libraryMenu(Person p, PCA pca, Quiz quiz){
 		String in = "";
 		System.out.println("Library menu");
-		PCA pca = new PCA(p.getUserVector());
-		Quiz quiz = new Quiz();
+
 
 		int gate = 1;
 		while(gate == 1){
@@ -109,7 +125,7 @@ public class ChatBot {
 				//Moved to library related method: System.out.println(ran.getBookDetails());
 				//System.out.println(chatBot.getStatement(3));
 				if(testReaction(sc.nextLine())){ //
-					p.updateTempList(ran);
+					p.updateTempBookList(ran);
 				}
 				//System.out.println(user1.getTempList());
 			}
@@ -125,7 +141,7 @@ public class ChatBot {
 					System.out.println(getStatement(13));
 					System.out.println(ran.getBookDetails());
 					if(testReaction(sc.nextLine())){ //
-						p.updateTempList(ran);
+						p.updateTempBookList(ran);
 					}
 				}
 			}
@@ -140,7 +156,7 @@ public class ChatBot {
 					System.out.println(getStatement(13));
 					System.out.println(ran.getBookDetails());
 					if(testReaction(sc.nextLine())){ //
-						p.updateTempList(ran);
+						p.updateTempBookList(ran);
 					}
 				}
 			}
@@ -156,7 +172,7 @@ public class ChatBot {
 					System.out.println(getStatement(13));
 					System.out.println(ran.getBookDetails());
 					if(testReaction(sc.nextLine())){ //
-						p.updateTempList(ran);
+						p.updateTempBookList(ran);
 					}
 				}
 			}
@@ -172,7 +188,7 @@ public class ChatBot {
 					System.out.println(getStatement(13));
 					System.out.println(ran.getBookDetails());
 					if(testReaction(sc.nextLine())){ //
-						p.updateTempList(ran);
+						p.updateTempBookList(ran);
 					}
 				}
 			}
@@ -192,7 +208,9 @@ public class ChatBot {
 			}
 			//Print cart list
 			else if(Integer.parseInt(in)==8){
-				System.out.println(p.getTempList().toString());
+				for (int i = 0; i < p.getTempBookList().size(); i++) {
+					System.out.println(p.getTempBookList().get(i).getBookDetails());
+				}
 			}
 
 			else{
@@ -214,9 +232,98 @@ public class ChatBot {
 	}
 
 	public void galleryMenu(Person p){
+		String in = "";
 		System.out.println("Gallery menu");
+		PCA pca = new PCA(p.getUserVector());
+		Quiz quiz = new Quiz();
 
+		int gate = 1;
+		while(gate == 1){
+			//System.out.println("1");
+			System.out.println("1 - random movie \n2 - random movie in genre\n3 - random movie by year\n4 - Search by movie name\n5 - Get current checkout list");
+			in = sc.nextLine();
+			if(Integer.parseInt(in)==1){
+				System.out.println(getStatement(13));
+				Movie ran = gallery.getTitleRandom();
+				System.out.println(ran.getMovieDetails());
+				//Moved to library related method: System.out.println(ran.getBookDetails());
+				//System.out.println(chatBot.getStatement(3));
+				if(testReaction(sc.nextLine())){ //
+					p.updateTempMovieList(ran);
+				}
+				//System.out.println(user1.getTempList());
+			}
+			//Search by genre
+			else if(Integer.parseInt(in)==2){
+				System.out.println("Search by genre: ");
+				Movie ran = gallery.getGeneraRand(sc.nextLine());
+				if(ran.getTitle() == null){
+					System.out.println(getStatement(17));
+				}
+				else{
+					//System.out.println(chatBot.getStatement(3));
+					System.out.println(getStatement(13));
+					System.out.println(ran.getMovieDetails());
+					if(testReaction(sc.nextLine())){ //
+						p.updateTempMovieList(ran);
+					}
+				}
+			}
+			//Search by title
+			else if(Integer.parseInt(in)==3){
+				System.out.println("Random movie by year: ");
+				Movie ran = gallery.getYearRand(Integer.parseInt(sc.nextLine()));
+				if(ran.getTitle() == null){
+					System.out.println(getStatement(19));
+				}
+				else{
+					System.out.println(getStatement(13));
+					System.out.println(ran.getMovieDetails());
+					if(testReaction(sc.nextLine())){ //
+						p.updateTempMovieList(ran);
+					}
+				}
+			}
+			//Search by author
+			else if(Integer.parseInt(in)==4){
+				System.out.println("Search by name: ");
+				Movie ran = gallery.byTitle(sc.nextLine());
+				if(ran.getTitle() == null){
+					System.out.println(getStatement(18));
+				}
+				else{
+					//System.out.println(chatBot.getStatement(3));
+					System.out.println(getStatement(13));
+					System.out.println(ran.getMovieDetails());
+					if(testReaction(sc.nextLine())){ //
+						p.updateTempMovieList(ran);
+					}
+				}
+			}
+			//Search by pages
+			else if(Integer.parseInt(in)==5){
+				for (int i = 0; i < p.getTempMovieList().size(); i++) {
+					System.out.println(p.getTempMovieList().get(i).getMovieDetails());
+				}
+			}
+			else{
+				System.out.println("Service unavailable");
+
+			}
+			System.out.println(getQuestion(6, p.getName()));
+			in = sc.nextLine();
+			//System.out.println("in: "+ in);
+			if(testReaction(in)){
+				continue;
+			}
+			else{
+				gate = 0;
+				break;
+			}
+		}
 	}
+	//.next usage noted
+	//PCA loop until user picks a book.
 	public void loopGeneraTitle(Person person,PCA pca, ArrayList<String> suggest,boolean last) {
 
 		Scanner sc = new Scanner(System.in);
@@ -243,7 +350,7 @@ public class ChatBot {
 					addToCart = testReaction(reply2);
 					if(addToCart) {
 						//person.checkOut.add(library.byTitle(t)); doesn't update tempList
-						person.updateTempList(library.byTitle(t));
+						person.updateTempBookList(library.byTitle(t));
 						System.out.println("added the book" + t + " to checkout list");
 						addToCart = false;
 						System.out.println("continue browsing?");

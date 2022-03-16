@@ -3,7 +3,7 @@ import java.util.*;
 
 
 public class PCA {
-    String [] generas = new String[] {"sci-fi","Romance","Action","Comedy", "Education","Classic","Horror"};
+    String [] generas = new String[] {"sci-fi","Romance","Action","Comedy", "Education","Classic","Horror"};  //needs fixing
     /*
     TODO
      generate pca matrix from online db

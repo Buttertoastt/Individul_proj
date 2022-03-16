@@ -76,7 +76,7 @@ public class Library {
         return  authorList;
     }
     //Return arrayList of strings of all authors in library.
-    //Specially made for callers that requires a list instead of arraylist
+    //Specially made for callers that requires a list instead of arraylist,
     public String [] getAllGeneras() {
         String [] allgenres;
         ArrayList<Book> genres = new ArrayList<>();
