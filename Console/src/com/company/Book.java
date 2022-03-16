@@ -1,5 +1,3 @@
-package com.company;
-
 public class Book {
     private String title, genre, author;
     private int pages;
