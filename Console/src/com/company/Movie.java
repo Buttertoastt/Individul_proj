@@ -1,3 +1,4 @@
+package com.company;
 public class Movie {
     private String title;
     private String genre;
