@@ -1,10 +1,14 @@
 package com.company;
-
 public class Movie {
     private String title;
     private String genre;
     private int year;
     private double duration;
+
+    Movie(){
+
+    }
+
     Movie(String t, String g, int y, double d){
         title = t;
         genre = g;
@@ -26,7 +30,7 @@ public class Movie {
         return genre;
     }
 
-    public int setYear(int y){ year = y;}
+    public void setYear(int y){ year = y;}
     public int getYear() {
         return year;
     }
@@ -37,5 +41,14 @@ public class Movie {
 
     public String getMovieDetails(){
         return "Title: " + title + "\t\tGenre: " + genre +  "\t\tYear: " + year + "\t\tDuration: " + duration;
+    }
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                ", year='" + year + '\'' +
+                ", duration='" + duration + '\'' +
+                '}';
     }
 }

@@ -1,5 +1,4 @@
 package com.company;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -57,7 +56,6 @@ public class Library {
     //Return arrayList of books by specific genre in library.
     public ArrayList<Book> getGeneraList(String genera) {
         ArrayList<Book> generaList = new ArrayList<>();
-        bookList = getBookList();
         for (Book b:bookList) {
             if(b.getGenre().equalsIgnoreCase(genera)) { //Don't use == to compare strings in Java, please. Unless you're comparing if they're pointing to the same object.
                 generaList.add(b);
@@ -77,7 +75,7 @@ public class Library {
         return  authorList;
     }
     //Return arrayList of strings of all authors in library.
-    //Specially made for callers that requires a list instead of arraylist
+    //Specially made for callers that requires a list instead of arraylist,
     public String [] getAllGeneras() {
         String [] allgenres;
         ArrayList<Book> genres = new ArrayList<>();
@@ -135,7 +133,16 @@ public class Library {
     public Book getTitleRandom() {
         int randNum = (int)(Math.random() * bookList.size());
         Book rand = bookList.get(randNum);
+        System.out.println(rand.getBookDetails());
         return rand;
+        /*
+        System.out.println(chatBot.getStatement(13));
+                Book ran = library.getTitleRandom();
+                //System.out.println(chatBot.getStatement(3));
+                if(chatBot.testReaction(sc.nextLine())){ //
+                    user1.updateTempList(ran);
+                }
+         */
     }
 
 
@@ -152,7 +159,7 @@ public class Library {
         }
         return bookString;
     }
-    //Returns random book that is similar to user's favourite book
+    /*Returns random book that is similar to user's favourite book
     //Incomplete and unused, held for future use.
     public Book favB(Person p){
         Book b = new Book();
@@ -181,10 +188,11 @@ public class Library {
         }
         return b;
     }
+     */
     //Returns random book using the pages passed into method to caller.
     public Book byPages(String s){ //In the future return list, from which user can pick from. And perhaps within a range of the inputted pages
         Book b = new Book();
-        ArrayList<Book> temp = new ArrayList<Book>();
+        ArrayList<Book> temp = new ArrayList<>();
         int a = 1;
         int ran = 0;
         int k = Integer.parseInt(s);
@@ -200,7 +208,8 @@ public class Library {
         }
         return b;
     }
-    public Book byTitle(String s){ //In the future return list, from which user can pick from.
+    //Find book by title name, returns book if exists in library
+    public Book byTitle(String s){
         Book b = new Book();
         ArrayList<Book> temp = new ArrayList<Book>();
         int a = 1;

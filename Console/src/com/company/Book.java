@@ -1,17 +1,9 @@
 package com.company;
-
 public class Book {
     private String title, genre, author;
     private int pages;
     private Library lib;
-    @Override
-    public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", genre='" + genre + '\'' +
-                ", author='" + author + '\'' +
-                '}';
-    }
+
 
     public Book(String title, String genre, String author) {
         this.title = title;
@@ -54,6 +46,16 @@ public class Book {
         this.author = author;
     }
     public String getBookDetails(){
-        return "Title: " + title + "\t\tGenre: " + genre + "\t\tAuthor: " + author;
+        return "Title: " + title + "\t\tGenre: " + genre + "\t\tAuthor: " + author + "\t\tPages: " + pages;
+    }
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                ", author='" + author + '\'' +
+                ", pages='" + pages + '\'' +
+
+                '}';
     }
 }
