@@ -21,38 +21,30 @@ public class Main {
         for (String s:option) {
             if(s.equalsIgnoreCase(browseMovies)){
                 System.out.println("You have selected: browse movies, is that right?");
-                parse = new ParseNLP(sc.nextLine());
-                parse.getSentiment();
-                if (sentiment != "Negative") {
+                boolean yes = chatBot.testReaction(sc.nextLine()); //can pass string here instead
+                if (yes) {
                     objective = browseMovies;
-                    break;
                 }
             }
             else if(s.equalsIgnoreCase(browseBooks)){
                 System.out.println("You have selected: browse books, is that right?");
-                parse = new ParseNLP(sc.nextLine());
-                parse.getSentiment();
-                if (sentiment != "Negative") {
+                boolean yes = chatBot.testReaction(sc.nextLine()); //can pass string here instead
+                if (yes) {
                     objective = browseBooks;
-                    break;
                 }
             }
             else if(s.equalsIgnoreCase(trivia)){
                 System.out.println("You have selected: trivia, is that right?");
-                parse = new ParseNLP(sc.nextLine());
-                sentiment = parse.getSentiment();
-                if (sentiment != "Negative") {
+                boolean yes = chatBot.testReaction(sc.nextLine()); //can pass string here instead
+                if (yes) {
                     objective = trivia;
-                    break;
                 }
             }
             else if(s.equalsIgnoreCase(request)){
                 System.out.println("You have selected: request a specific item, is that right?");
-                parse = new ParseNLP(sc.nextLine());
-                parse.getSentiment();
-                if (sentiment != "Negative") {
+                boolean yes = chatBot.testReaction(sc.nextLine()); //can pass string here instead
+                if (yes) {
                     objective = request;
-                    break;
                 }
             }
         }

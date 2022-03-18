@@ -64,11 +64,10 @@ public class ChatBot {
 	}
 	public boolean testReaction(String reply) {
 		boolean happy = false;
-		for (String s:positiveFeedBack) {
-			if(s.contains(reply.toLowerCase())||reply.contains(s.toLowerCase())) {
-				happy = true;
-				return happy;
-			}
+		ParseNLP parse = new ParseNLP(reply);
+		String sentiment = parse.getSentiment();
+		if (sentiment != "Negative") {
+			happy = true;
 		}
 		return happy;
 	}
