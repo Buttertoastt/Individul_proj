@@ -1,4 +1,3 @@
-package com.company;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +11,6 @@ public class Main {
     static String sentiment = "Neural";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         Library library = new Library();
         ChatBot chatBot = new ChatBot();
         Person user1 = new Person();
@@ -21,7 +19,7 @@ public class Main {
         parse = new ParseNLP(sc.nextLine());
         ArrayList<String> option = parse.getStringList();
         for (String s:option) {
-            if(s == browseMovies){
+            if(s.equalsIgnoreCase(browseMovies)){
                 System.out.println("You have selected: browse movies, is that right?");
                 parse = new ParseNLP(sc.nextLine());
                 parse.getSentiment();
@@ -30,7 +28,7 @@ public class Main {
                     break;
                 }
             }
-            else if(s == browseBooks){
+            else if(s.equalsIgnoreCase(browseBooks)){
                 System.out.println("You have selected: browse books, is that right?");
                 parse = new ParseNLP(sc.nextLine());
                 parse.getSentiment();
@@ -58,6 +56,19 @@ public class Main {
                 }
             }
         }
+        if(objective.equalsIgnoreCase(trivia)) {
+            //TODO implement trivia , Rich
+        }
+        else if(objective.equalsIgnoreCase(browseBooks)) {
+            //TODO implement loopGeneraTitle
+        }
+        else if(objective.equalsIgnoreCase(browseMovies)) {
+            //TODO implement loopGeneraTitleMovie()
+        }
+        else if(objective.equalsIgnoreCase(request)) {
+            //TODO implement search forSpecificTitle()
+        }
+
 
 
     }

@@ -1,4 +1,3 @@
-package com.company;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreDocument;
@@ -17,7 +16,6 @@ public class ParseNLP {
         stanfordCoreNLP = Pipeline.getPipeline();
         coreDocument = new CoreDocument(input);
         stanfordCoreNLP.annotate(coreDocument);
-
         coreLabelList = coreDocument.tokens();
     }
     public List<CoreSentence> getSentences(){
@@ -63,7 +61,7 @@ public class ParseNLP {
     }
     //pos is the code which represents what the word is
     //ie NN = Noun, singular or mass
-    //seeinfo_pos.txt
+    //see info_pos.txt
     public ArrayList<String> getPosList() {
         ArrayList<String> posList = new ArrayList<>();
         String pos = "";

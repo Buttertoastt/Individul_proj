@@ -1,4 +1,3 @@
-package com.company;
 import java.util.*;
 
 public class ChatBot {
@@ -59,6 +58,9 @@ public class ChatBot {
 		positiveFeedBack.add(p5);
 		positiveFeedBack.add(p6);
 
+	}
+	public static int getInt() {
+		return 2;
 	}
 	public boolean testReaction(String reply) {
 		boolean happy = false;

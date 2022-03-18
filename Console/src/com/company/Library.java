@@ -1,4 +1,3 @@
-package com.company;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -135,14 +134,7 @@ public class Library {
         Book rand = bookList.get(randNum);
         System.out.println(rand.getBookDetails());
         return rand;
-        /*
-        System.out.println(chatBot.getStatement(13));
-                Book ran = library.getTitleRandom();
-                //System.out.println(chatBot.getStatement(3));
-                if(chatBot.testReaction(sc.nextLine())){ //
-                    user1.updateTempList(ran);
-                }
-         */
+
     }
 
 
@@ -159,36 +151,7 @@ public class Library {
         }
         return bookString;
     }
-    /*Returns random book that is similar to user's favourite book
-    //Incomplete and unused, held for future use.
-    public Book favB(Person p){
-        Book b = new Book();
-        int a = 1;
-        for (int i = 0; i < getBookList().size(); i++) {
-            if(p.getFavoriteBook().equalsIgnoreCase(getBookList().get(i).getTitle())){ //In the future: include books with multiple vol or series
-                b = getBookList().get(i);
-            }
-        }
-        return b;
-    }
-    //Returns random book within the same genre as user's favourite genre
-    public Book favG(Person p){
-        Book b = new Book();
-        ArrayList<Book> temp = new ArrayList<Book>();
-        int a = 1;
-        int ran = 0;
-        for (int i = 0; i < getBookList().size(); i++) {
-            if(p.getFavoriteGenera().equalsIgnoreCase(getBookList().get(i).getGenre())){ //In the future: include books with multiple vol or series
-                temp.add(getBookList().get(i));
-            }
-        }
-        if(temp.size()>0){ //Necessary?
-            //ran = (int) Math.round(Math.random()*temp.size());
-            b = temp.get(ran);
-        }
-        return b;
-    }
-     */
+
     //Returns random book using the pages passed into method to caller.
     public Book byPages(String s){ //In the future return list, from which user can pick from. And perhaps within a range of the inputted pages
         Book b = new Book();
