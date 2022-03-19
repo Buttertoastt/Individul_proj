@@ -1,10 +1,11 @@
 import java.util.*;
+import java.util.ArrayList;
 
 
 public class PCA {
     Library library;
-    Galler gallery;
-    ArrayList<String> generas = new ArrayList<>();
+    Gallery gallery;
+    String [] generas = library.getAllGeneras();
     /*
     TODO
      generate pca matrix from online db
@@ -17,6 +18,7 @@ public class PCA {
     int [] distances = new int[utility.length];
     int index = 0;
     int value = 1000;
+    private boolean values;
 
     public PCA(int[] user) {
         this.user = user;
@@ -74,9 +76,10 @@ public class PCA {
         }
         return values;
     }
-    public ArrayList<String> getTopThree() {
+    public ArrayList<String> getTopThreeMovie() {
         int [] indices = new int [] {0,0,0};
-        ArrayList<String> values = new ArrayList<>();
+        generas = gallery.getAllGeneras();
+        ArrayList <String> values = new ArrayList<String>();
         int row = index;
         int [] su = getStandardUser();
         for (int i = 0; i < su.length; i++) {
@@ -97,6 +100,7 @@ public class PCA {
                 //System.out.println("genera 2" + values[2]);
             }
         }
+        generas = library.getAllGeneras();
         return values;
     }
 
