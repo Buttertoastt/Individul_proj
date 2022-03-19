@@ -2,7 +2,9 @@ import java.util.*;
 
 
 public class PCA {
-    String [] generas = new String[] {"sci-fi","Romance","Action","Comedy", "Education","Classic","Horror"};  //needs fixing
+    Library library;
+    Galler gallery;
+    ArrayList<String> generas = new ArrayList<>();
     /*
     TODO
      generate pca matrix from online db
@@ -72,6 +74,32 @@ public class PCA {
         }
         return values;
     }
+    public ArrayList<String> getTopThree() {
+        int [] indices = new int [] {0,0,0};
+        ArrayList<String> values = new ArrayList<>();
+        int row = index;
+        int [] su = getStandardUser();
+        for (int i = 0; i < su.length; i++) {
+            if (su[i]> indices[0]) {
+                values.add(generas[i]);
+                indices[0] = i;
+                //System.out.println("genera 0" + values[0]);
+            }
+            else if (su[i]> indices[1] && su[i] != indices[0]) {
+                values.add(generas[i]);
+                indices[1] = i;
+                //System.out.println("genera 1" + values[1]);
+            }
+            else if (su[i]> indices[2] && su[i] != indices[1]) {
+
+                values.add(generas[i]);
+                indices[2] = i;
+                //System.out.println("genera 2" + values[2]);
+            }
+        }
+        return values;
+    }
+
     //gets the compliment of the top three genres of NN
     public ArrayList<String> remainingOptions(ArrayList<String> top3) {
         ArrayList<String> remaining = new ArrayList<>();
