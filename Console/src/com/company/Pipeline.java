@@ -1,4 +1,3 @@
-package com.company;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
 import java.util.Properties;

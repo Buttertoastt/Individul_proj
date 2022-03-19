@@ -1,9 +1,11 @@
-package com.company;
 import java.util.*;
+import java.util.ArrayList;
 
 
 public class PCA {
-    String [] generas = new String[] {"sci-fi","Romance","Action","Comedy", "Education","Classic","Horror"};  //needs fixing
+    Library library;
+    Gallery gallery;
+    String [] generas = library.getAllGeneras();
     /*
     TODO
      generate pca matrix from online db
@@ -16,6 +18,7 @@ public class PCA {
     int [] distances = new int[utility.length];
     int index = 0;
     int value = 1000;
+    private boolean values;
 
     public PCA(int[] user) {
         this.user = user;
@@ -73,6 +76,34 @@ public class PCA {
         }
         return values;
     }
+    public ArrayList<String> getTopThreeMovie() {
+        int [] indices = new int [] {0,0,0};
+        generas = gallery.getAllGeneras();
+        ArrayList <String> values = new ArrayList<String>();
+        int row = index;
+        int [] su = getStandardUser();
+        for (int i = 0; i < su.length; i++) {
+            if (su[i]> indices[0]) {
+                values.add(generas[i]);
+                indices[0] = i;
+                //System.out.println("genera 0" + values[0]);
+            }
+            else if (su[i]> indices[1] && su[i] != indices[0]) {
+                values.add(generas[i]);
+                indices[1] = i;
+                //System.out.println("genera 1" + values[1]);
+            }
+            else if (su[i]> indices[2] && su[i] != indices[1]) {
+
+                values.add(generas[i]);
+                indices[2] = i;
+                //System.out.println("genera 2" + values[2]);
+            }
+        }
+        generas = library.getAllGeneras();
+        return values;
+    }
+
     //gets the compliment of the top three genres of NN
     public ArrayList<String> remainingOptions(ArrayList<String> top3) {
         ArrayList<String> remaining = new ArrayList<>();
