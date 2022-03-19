@@ -14,6 +14,7 @@ public class Main {
         Library library = new Library();
         ChatBot chatBot = new ChatBot();
         Person user1 = new Person();
+        PCA pca = new PCA(user1.getUserVector());
         System.out.println(chatBot.getStatement(0));
         System.out.println("Would you like to: browse books, browse movies, play trivia, or request an item?");
         parse = new ParseNLP(sc.nextLine());
@@ -52,10 +53,15 @@ public class Main {
             //TODO implement trivia , Rich
         }
         else if(objective.equalsIgnoreCase(browseBooks)) {
-            //TODO implement loopGeneraTitle
+            chatBot.loopGeneraTitle(user1 ,pca,pca.getTopThree(), false);
         }
         else if(objective.equalsIgnoreCase(browseMovies)) {
-            //TODO implement loopGeneraTitleMovie()
+            user1.setUserVector();
+            user1.setPcaVector(pca.getStandardUser());
+            //System.out.println("pass1");
+            user1.setTopThree(pca.getTopThree());
+            //System.out.println("pass2");
+            chatBot.loopGeneraTitleMovie(user1 ,pca,pca.getTopThree(), false);
         }
         else if(objective.equalsIgnoreCase(request)) {
             //TODO implement search forSpecificTitle()

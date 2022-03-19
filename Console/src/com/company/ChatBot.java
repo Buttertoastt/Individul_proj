@@ -49,7 +49,7 @@ public class ChatBot {
 
 	//.next usage noted
 	//PCA loop until user picks a book.
-	public void loopGeneraTitle(Person person,PCA pca, ArrayList<String> suggest,boolean last) {
+	public void loopGeneraTitle(Person person,PCA pca, ArrayList<String> suggest, boolean last) {
 
 		Scanner sc = new Scanner(System.in);
 		boolean happy = false;
@@ -87,14 +87,9 @@ public class ChatBot {
 					}
 				}
 			}
-			else {
-				//System.out.println("inner console");
-				//getConsolation(loopNum);
-			}
 			loopNum++;
 		}
 		if(!happy) {
-			//System.out.println("outter console");
 			getConsolation(loopNum);
 			System.out.println("");
 			ArrayList<String> finalOption = pca.remainingOptions(person.getTopThree());
@@ -128,8 +123,8 @@ public class ChatBot {
 					addToCart = testReaction(reply2);
 					if(addToCart) {
 						//person.checkOut.add(library.byTitle(t)); doesn't update tempList
-						person.updateTempMovieList();List(gallery.byTitle(t));
-						System.out.println("added the book" + t + " to checkout list");
+						person.updateTempMovieList(gallery.byTitle(t));
+						System.out.println("added the movie" + t + " to checkout list");
 						addToCart = false;
 						System.out.println("continue browsing?");
 						String reply3 = sc.next();
