@@ -17,7 +17,7 @@ public class SentimentAnalysis {
         String lemma = " ";
         for(CoreSentence sentence: sentences) {
             String sentiment = sentence.sentiment();
-            System.out.println(sentiment);
+            //System.out.println(sentiment);
         }
     }
 }

@@ -39,19 +39,7 @@ public class Library {
     public ArrayList<Book> getBookList() {
         return bookList;
     }
-    public void setBookList(ArrayList<Book> bookList) {
-        this.bookList = bookList;
-    }
-    //Add book to library return boolean value to caller.
-    public boolean addBook(String title, String genre, int pages, String author) {
-        for (int i = 0; i < bookList.size(); i++) {
-            if(title.equalsIgnoreCase(bookList.get(i).getTitle())){
-                return false;
-            }
-        }
-        bookList.add(new Book(title,genre,pages,author));
-        return true;
-    }
+
     //Return arrayList of books by specific genre in library.
     public ArrayList<Book> getGeneraList(String genera) {
         ArrayList<Book> generaList = new ArrayList<>();
@@ -62,17 +50,16 @@ public class Library {
         }
         return  generaList;
     }
-    //Return arrayList of books by specific author in library.
-    public ArrayList<Book> getAuthorList(String author) {
-        ArrayList<Book> authorList = new ArrayList<>();
-        for (Book b:bookList) {
-            if(b.getAuthor().equalsIgnoreCase(author))
-            {
-                authorList.add(b);
-            }
+
+    //Return arrayList of strings of book titles in library.
+    public ArrayList<String> getTitleList(ArrayList<Book> books) {
+        ArrayList<String> titles = new ArrayList<>();
+        for (Book book :books) {
+            titles.add(book.getTitle());
         }
-        return  authorList;
+        return titles;
     }
+
     //Return arrayList of strings of all authors in library.
     //Specially made for callers that requires a list instead of arraylist,
     public String [] getAllGeneras() {
@@ -89,6 +76,61 @@ public class Library {
         }
         return allgenres;
     }
+
+    //Find book by title name, returns book if exists in library
+    public Book byTitle(String s){
+        Book b = new Book();
+        ArrayList<Book> temp = new ArrayList<Book>();
+        int a = 1;
+        int ran = 0;
+        for (int i = 0; i < getBookList().size(); i++) {
+            if(s.equalsIgnoreCase(getBookList().get(i).getTitle())){
+                temp.add(getBookList().get(i));
+            }
+        }
+        if(temp.size()>0){
+            ran = (int) (Math.random()*temp.size());
+            b = temp.get(ran);
+        }
+
+        return b;
+    }
+    //Checks for dupes in get all authors and get all genres methods
+    //Returns true if a duplicate is found and false otherwise
+    public boolean checkDup(Book in, ArrayList<Book> out){
+        for (int i = 0; i < out.size(); i++) {
+            if(in.getAuthor().equalsIgnoreCase(out.get(i).getAuthor()) || in.getGenre().equalsIgnoreCase(out.get(i).getGenre())){
+                return true;
+            }
+        }
+        return false;
+    }
+    /*
+    Unused methods
+    public void setBookList(ArrayList<Book> bookList) {
+        this.bookList = bookList;
+    }
+    //Add book to library return boolean value to caller.
+    public boolean addBook(String title, String genre, int pages, String author) {
+        for (int i = 0; i < bookList.size(); i++) {
+            if(title.equalsIgnoreCase(bookList.get(i).getTitle())){
+                return false;
+            }
+        }
+        bookList.add(new Book(title,genre,pages,author));
+        return true;
+    }
+    //Return arrayList of books by specific author in library.
+    public ArrayList<Book> getAuthorList(String author) {
+        ArrayList<Book> authorList = new ArrayList<>();
+        for (Book b:bookList) {
+            if(b.getAuthor().equalsIgnoreCase(author))
+            {
+                authorList.add(b);
+            }
+        }
+        return  authorList;
+    }
     //Return arrayList of strings of all authors in library.
     public ArrayList<String> getAllAuthors() {
         ArrayList<String> authors = new ArrayList<>();
@@ -98,14 +140,7 @@ public class Library {
         }
         return authors;
     }
-    //Return arrayList of strings of book titles in library.
-    public ArrayList<String> getTitleList(ArrayList<Book> books) {
-        ArrayList<String> titles = new ArrayList<>();
-        for (Book book :books) {
-            titles.add(book.getTitle());
-        }
-        return titles;
-    }
+
     //Return random book by genera to caller.
     public Book getGeneraRand(String genera) {
         ArrayList<Book> generaList = getGeneraList(genera);
@@ -171,34 +206,6 @@ public class Library {
         }
         return b;
     }
-    //Find book by title name, returns book if exists in library
-    public Book byTitle(String s){
-        Book b = new Book();
-        ArrayList<Book> temp = new ArrayList<Book>();
-        int a = 1;
-        int ran = 0;
-        for (int i = 0; i < getBookList().size(); i++) {
-            if(s.equalsIgnoreCase(getBookList().get(i).getTitle())){
-                temp.add(getBookList().get(i));
-            }
-        }
-        if(temp.size()>0){
-            ran = (int) (Math.random()*temp.size());
-            b = temp.get(ran);
-        }
-
-        return b;
-    }
-    //Checks for dupes in get all authors and get all genres methods
-    //Returns true if a duplicate is found and false otherwise
-    public boolean checkDup(Book in, ArrayList<Book> out){
-
-        for (int i = 0; i < out.size(); i++) {
-            if(in.getAuthor().equalsIgnoreCase(out.get(i).getAuthor()) || in.getGenre().equalsIgnoreCase(out.get(i).getGenre())){
-                return true;
-            }
-        }
-        return false;
-    }
+     */
 
 }

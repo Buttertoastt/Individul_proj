@@ -9,6 +9,7 @@ public class Main {
     static String request = "request";
     static String objective = "";
     static String sentiment = "Neural";
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Library library = new Library();
@@ -49,25 +50,35 @@ public class Main {
                 }
             }
         }
+        //System.out.println(option.size());
+        while(!objective.equalsIgnoreCase("exit")){
+            mainMenu(chatBot, user1, pca);
+        }
+
+    }
+
+    public static void mainMenu(ChatBot chatBot, Person user1, PCA pca){
         if(objective.equalsIgnoreCase(trivia)) {
             //TODO implement trivia , Rich
         }
         else if(objective.equalsIgnoreCase(browseBooks)) {
+            user1.setUserVector();
+            user1.setPcaVector(pca.getStandardUser());
+            user1.setTopThree(pca.getTopThree());
             chatBot.loopGeneraTitle(user1 ,pca,pca.getTopThree(), false);
+            System.out.println("Exit");
+            objective = "exit";
         }
         else if(objective.equalsIgnoreCase(browseMovies)) {
             user1.setUserVector();
             user1.setPcaVector(pca.getStandardUser());
-            //System.out.println("pass1");
             user1.setTopThree(pca.getTopThree());
-            //System.out.println("pass2");
             chatBot.loopGeneraTitleMovie(user1 ,pca,pca.getTopThree(), false);
+            objective = "exit";
         }
         else if(objective.equalsIgnoreCase(request)) {
-            //TODO implement search forSpecificTitle()
+            System.out.println("Would you like to request for a book or a movie?");
+            //Todo implement request
         }
-
-
-
     }
 }

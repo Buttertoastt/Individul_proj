@@ -8,7 +8,6 @@ public class Person {
     private String favoriteGenera;
     private int [] pcaVector;
     Library lib = new Library();
-    //String [] generas = new String[] {"sci-fi","Romance","Action","Comedy", "Education","Classic","Horror"};
     String [] generas = lib.getAllGeneras();
     ArrayList<String> topThree = new ArrayList<>();
     private int [] userVector = new int[generas.length];
@@ -71,9 +70,25 @@ public class Person {
         this.favoriteGenera = favoriteGenera;
     }
     public Person() {
-
+        this.favoriteGenera = "action";
     }
 
+
+
+
+    public void updateTempBookList(Book b){
+        tempBookList.add(b);
+    }
+    public void updateTempMovieList(Movie m){
+        tempMovieList.add(m);
+    }
+    public void removeTempBookList(Book b){
+        for (int i = 0; i < tempBookList.size(); i++) {
+            if(tempBookList.get(i).getTitle().equalsIgnoreCase(b.getTitle())){
+                tempBookList.remove(i);
+            }
+        }
+    }
     public String getName() {
         return name;
     }
@@ -120,33 +135,6 @@ public class Person {
         return tempMovieList;
     }
 
-    public ArrayList<Book> getPermBookList(){
-        return permBookList;
-    }
-
-    public void updateTempBookList(Book b){
-        tempBookList.add(b);
-    }
-    public void updateTempMovieList(Movie m){
-        tempMovieList.add(m);
-    }
-    public void removeTempBookList(Book b){
-        for (int i = 0; i < tempBookList.size(); i++) {
-            if(tempBookList.get(i).getTitle().equalsIgnoreCase(b.getTitle())){
-                tempBookList.remove(i);
-            }
-        }
-    }
-    public void updatePermBookList(Book b){
-        permBookList.add(b);
-    }
-    public void removePermBookList(Book b){
-        for (int i = 0; i < permBookList.size(); i++) {
-            if(permBookList.get(i).getTitle().equalsIgnoreCase(b.getTitle())){
-                permBookList.remove(i);
-            }
-        }
-    }
 
 
 }

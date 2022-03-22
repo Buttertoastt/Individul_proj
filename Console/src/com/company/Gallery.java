@@ -16,24 +16,12 @@ public class Gallery {
         movieList.add(new Movie("Scary movie", "Comedy", 2000, 1.5));
         movieList.add(new Movie("LA 92", "Education", 2017, 2));
     }
-    public void setMovieList(ArrayList<Movie> movieList) {
-        this.movieList = movieList;
-    }
 
     public ArrayList<Movie> getMovieList() {
         return movieList;
     }
 
-    //Add movie to gallery return boolean value to caller.
-    public boolean addMovie(String title, String genre, int year, double duration) {
-        for (int i = 0; i < movieList.size(); i++) {
-            if(title.equalsIgnoreCase(movieList.get(i).getTitle())){
-                return false;
-            }
-        }
-        movieList.add(new Movie(title,genre,year,duration));
-        return true;
-    }
+
     //Return arrayList of movies by specific genre in gallery.
     public ArrayList<Movie> getGeneraList(String genera) {
         ArrayList<Movie> generaList = new ArrayList<Movie>();
@@ -44,26 +32,7 @@ public class Gallery {
         }
         return  generaList;
     }
-    //Return arrayList of movies by specific year in gallery.
-    public ArrayList<Movie> getYearList(int y) {
-        ArrayList<Movie> yearList = new ArrayList<>();
-        for (Movie m: movieList) {
-            if(m.getYear() == y) {
-                yearList.add(m);
-            }
-        }
-        return  yearList;
-    }
-    //Return arrayList of movies by specific duration in gallery.
-    public ArrayList<Movie> getDurationList(double d) {
-        ArrayList<Movie> durationList = getMovieList();
-        for (Movie m:movieList) {
-            if(m.getDuration() == d) {
-                durationList.add(m);
-            }
-        }
-        return  durationList;
-    }
+
     //Specially made for callers that requires a list instead of arraylist
     public String [] getAllGeneras() {
         String [] allGenres;
@@ -87,6 +56,52 @@ public class Gallery {
         }
         return titles;
     }
+
+
+    public Movie byTitle(String s){ //In the future return list, from which user can pick from.
+        Movie m = new Movie();
+        ArrayList<Movie> temp = new ArrayList<Movie>();
+        int a = 1;
+        int ran = 0;
+        for (int i = 0; i < getMovieList().size(); i++) {
+            if(s.equalsIgnoreCase(getMovieList().get(i).getTitle())){
+                temp.add(getMovieList().get(i));
+            }
+        }
+        if(temp.size()>0){
+            ran = (int) (Math.random()*temp.size());
+            m = temp.get(ran);
+        }
+
+        return m;
+    }
+    //Checks for dupes in get genre methods
+    //Returns true if a duplicate is found and false otherwise
+    public boolean checkDup(Movie in, ArrayList<Movie> out){
+        for (int i = 0; i < out.size(); i++) {
+            if(in.getGenre().equalsIgnoreCase(out.get(i).getGenre())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    public void setMovieList(ArrayList<Movie> movieList) {
+        this.movieList = movieList;
+    }
+
+    //Add movie to gallery return boolean value to caller.
+    public boolean addMovie(String title, String genre, int year, double duration) {
+        for (int i = 0; i < movieList.size(); i++) {
+            if(title.equalsIgnoreCase(movieList.get(i).getTitle())){
+                return false;
+            }
+        }
+        movieList.add(new Movie(title,genre,year,duration));
+        return true;
+    }
+    
     //Returns arraylist of type integer, of all years movies in gallery were published.
     public ArrayList<Integer> getAllYearList(ArrayList<Movie> movies) {
         ArrayList<Integer> years = new ArrayList<>();
@@ -145,35 +160,6 @@ public class Gallery {
         }
         return movieString;
     }
-
-
-    public Movie byTitle(String s){ //In the future return list, from which user can pick from.
-        Movie m = new Movie();
-        ArrayList<Movie> temp = new ArrayList<Movie>();
-        int a = 1;
-        int ran = 0;
-        for (int i = 0; i < getMovieList().size(); i++) {
-            if(s.equalsIgnoreCase(getMovieList().get(i).getTitle())){
-                temp.add(getMovieList().get(i));
-            }
-        }
-        if(temp.size()>0){
-            ran = (int) (Math.random()*temp.size());
-            m = temp.get(ran);
-        }
-
-        return m;
-    }
-    //Checks for dupes in get genre methods
-    //Returns true if a duplicate is found and false otherwise
-    public boolean checkDup(Movie in, ArrayList<Movie> out){
-        for (int i = 0; i < out.size(); i++) {
-            if(in.getGenre().equalsIgnoreCase(out.get(i).getGenre())){
-                return true;
-            }
-        }
-        return false;
-    }
     //Checks for dupes in get year methods
     //Returns true if a duplicate is found and false otherwise
     public boolean checkDupYear(Movie in, ArrayList<Integer> out){
@@ -184,5 +170,26 @@ public class Gallery {
         }
         return false;
     }
+    //Return arrayList of movies by specific year in gallery.
+    public ArrayList<Movie> getYearList(int y) {
+        ArrayList<Movie> yearList = new ArrayList<>();
+        for (Movie m: movieList) {
+            if(m.getYear() == y) {
+                yearList.add(m);
+            }
+        }
+        return  yearList;
+    }
+    //Return arrayList of movies by specific duration in gallery.
+    public ArrayList<Movie> getDurationList(double d) {
+        ArrayList<Movie> durationList = getMovieList();
+        for (Movie m:movieList) {
+            if(m.getDuration() == d) {
+                durationList.add(m);
+            }
+        }
+        return  durationList;
+    }
+    */
 
 }
