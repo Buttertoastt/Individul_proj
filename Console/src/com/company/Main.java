@@ -67,14 +67,14 @@ public class Main {
             user1.setTopThree(pca.getTopThree());
             chatBot.loopGeneraTitle(user1 ,pca,pca.getTopThree(), false);
             System.out.println("Exit");
-            objective = "neutral";
+            objective = "exit";
         }
         else if(objective.equalsIgnoreCase(browseMovies)) {
             user1.setUserVector();
             user1.setPcaVector(pca.getStandardUser());
             user1.setTopThree(pca.getTopThree());
             chatBot.loopGeneraTitleMovie(user1 ,pca,pca.getTopThree(), false);
-            objective = "neutral";
+            objective = "exit";
         }
         else if(objective.equalsIgnoreCase(request)) {
             System.out.println("Would you like to request for a book or a movie?");
