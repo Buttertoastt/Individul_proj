@@ -5,84 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be48c9f5-b5d1-438a-bbcd-14732eadc878" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_apple_AppleJavaExtensions_1_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_dlsc_formsfx_formsfx_core_11_3_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_dlsc_formsfx_formsfx_core_11_3_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_xml_bind_jaxb_core_2_3_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_xml_bind_jaxb_impl_2_4_0_b180830_0438.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_jollyday_jollyday_0_4_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__edu_stanford_nlp_stanford_corenlp_4_4_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__edu_stanford_nlp_stanford_corenlp_models_4_4_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__edu_stanford_nlp_stanford_corenlp_models_english_4_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_4_0_b180830_0359.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_10_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_3_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_lucene_lucene_analyzers_common_7_5_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_lucene_lucene_core_7_5_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_lucene_lucene_queries_7_5_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_lucene_lucene_queryparser_7_5_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_lucene_lucene_sandbox_7_5_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ejml_ejml_cdense_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ejml_ejml_core_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ejml_ejml_ddense_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ejml_ejml_dsparse_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ejml_ejml_fdense_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ejml_ejml_fsparse_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ejml_ejml_simple_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ejml_ejml_zdense_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_javax_json_1_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_12.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_nop_1_6_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xalan_serializer_2_7_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xalan_xalan_2_7_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xerces_xercesImpl_2_8_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_3_03.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xom_xom_1_3_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/chatLog.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/log/chatlog/HelloController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/log/chatlog/HelloController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/log/chatlog/HelloController$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/log/chatlog/HelloController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/log/chatlog/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/log/chatlog/Server$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/log/chatlog/Server.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/log/chatlog/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/Stanford.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/src/main/java/Chatbot.java" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/src/main/java/Chatbot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Book.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Book.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Chat.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Chat.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Chatbot.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Chatbot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Gallery.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Gallery.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Library.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Library.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Movie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/NameExtract.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/NameExtract.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/PCA.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/PCA.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Parse.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Parse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/ParseNLP.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/ParseNLP.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/PartsOfSpeech.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/PartsOfSpeech.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Patterns.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Patterns.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Person.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Pipeline.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Pipeline.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Quiz.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Quiz.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/SentenceRecognizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/SentenceRecognizer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/SentimentAnalysis.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/SentimentAnalysis.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/TokenizeExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/TokenizeExample.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Tree.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Tree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/Word.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/Word.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stanford/target/classes/quizQuestion.class" beforeDir="false" afterPath="$PROJECT_DIR$/Stanford/target/classes/quizQuestion.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +172,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Assignment3$SentenceRecognizer.ic" NAME="SentenceRecognizer Coverage Results" MODIFIED="1647923153260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Assignment3$Test.ic" NAME="Test Coverage Results" MODIFIED="1647912535371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Assignment3$Main.ic" NAME="Main Coverage Results" MODIFIED="1647977474655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Assignment3$Main.ic" NAME="Main Coverage Results" MODIFIED="1647977859021" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Assignment3$Chatbot.ic" NAME="Chatbot Coverage Results" MODIFIED="1647915897489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Assignment3$ParserGUI.ic" NAME="ParserGUI Coverage Results" MODIFIED="1647912500174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Assignment3$TokenizeExample.ic" NAME="TokenizeExample Coverage Results" MODIFIED="1647923380752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
