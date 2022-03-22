@@ -1,5 +1,3 @@
-import edu.stanford.nlp.pipeline.CoreDocument;
-import edu.stanford.nlp.pipeline.CoreSentence;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
 import javax.swing.*;
@@ -10,8 +8,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 class Chatbot extends JFrame implements ActionListener {
 
@@ -78,7 +77,7 @@ class Chatbot extends JFrame implements ActionListener {
         PCA pca = new PCA(user1.getUserVector());
 
         area.append(chatBot.getStatement(0));
-        area.append("Would you like to: browse books, browse movies, play trivia, or request an item?");
+        area.append("\nWould you like to: browse books, browse movies, play trivia, or request an item?\n");
         String text = field.getText().toLowerCase();
         area.append("User : " + field.getText() + "\n");
 
@@ -110,17 +109,7 @@ class Chatbot extends JFrame implements ActionListener {
                     objective = request;
                 }
             }
-
-            Properties props = new Properties();
-            props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse, sentiment");
-            CoreDocument coreDocument = new CoreDocument(text);
-            stanfordCoreNLP.annotate(coreDocument);
-            List<CoreSentence> sentences = coreDocument.sentences();
-
-            for (CoreSentence sentence : sentences) {
-
-
-                area.append(String.valueOf(sentence));
+            ;
 
 
                 if (text.contains("time")) {
@@ -168,7 +157,7 @@ class Chatbot extends JFrame implements ActionListener {
                         } else if (num == 2) {
                             area.append("My apologies...I don't understand ");
                         }
-                    }
+
                 }
 
             }

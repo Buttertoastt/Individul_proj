@@ -48,7 +48,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>1.6.2</version>
-            <scope>nlp2</scope>
+            <scope>Standford</scope>
         </dependency>
 
 
