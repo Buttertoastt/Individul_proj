@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 
 public class PCA {
-    Library library;
-    Gallery gallery;
+    Library library = new Library();
+    Gallery gallery = new Gallery();
     String [] generas = library.getAllGeneras();
     /*
     TODO
