@@ -71,6 +71,11 @@ public class ParseNLP {
         }
         return posList;
     }
+
+    public void addCorelabel(String input){
+
+    }
+
     public String getSentiment() {
         String sentiment = "Neutral";
         getSentences();
