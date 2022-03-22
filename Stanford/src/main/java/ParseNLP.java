@@ -73,4 +73,16 @@ public class ParseNLP {
         return posList;
     }
 
+    public String getSentiment() {
+        String sentiment = "Neutral";
+        getSentences();
+        for(CoreSentence sentence: sentenceList) {
+            if(sentence.sentiment().length()>1) {
+                sentiment = sentence.sentiment();
+            }
+            System.out.println(sentiment);
+        }
+        return sentiment;
+    }
+
 }

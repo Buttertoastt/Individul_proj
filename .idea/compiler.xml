@@ -6,26 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-<<<<<<< Updated upstream
-        <module name="cBOT3" />
-        <module name="chatLog" />
-=======
-        <module name="chatLog" />
         <module name="Stanford" />
-        <module name="cBOT3" />
-        <module name="ChatGUI" />
->>>>>>> Stashed changes
-        <module name="A3_client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="A3_client" target="17" />
       <module name="cBOT3" target="17" />
-<<<<<<< Updated upstream
-      <module name="chatLog" target="17" />
-    </bytecodeTargetLevel>
-  </component>
-=======
       <module name="ChatBotGUI" target="8" />
       <module name="ChatGUI" target="14" />
       <module name="chatLog" target="17" />
@@ -37,5 +23,4 @@
       <module name="ChatGUI" options="" />
     </option>
   </component>
->>>>>>> Stashed changes
 </project>
