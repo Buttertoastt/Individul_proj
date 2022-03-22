@@ -86,12 +86,6 @@ public class ChatBot {
 			}
 			loopNum++;
 		}
-		if(!happy) {
-			System.out.println("Unhappy");
-			getConsolation(loopNum);
-			ArrayList<String> finalOption = pca.remainingOptions(person.getTopThree());
-			loopGeneraTitle(person,pca,finalOption,true);
-		}
 	}
 	public void loopGeneraTitleMovie(Person person, PCA pca, ArrayList<String> suggest, boolean last) {
 

@@ -52,12 +52,12 @@ public class Main {
         }
         //System.out.println(option.size());
         while(!objective.equalsIgnoreCase("exit")){
-
+            mainMenu(chatBot, user1, pca);
         }
 
     }
 
-    public void mainMenu(ChatBot chatBot, Person user1, PCA pca){
+    public static void mainMenu(ChatBot chatBot, Person user1, PCA pca){
         if(objective.equalsIgnoreCase(trivia)) {
             //TODO implement trivia , Rich
         }
@@ -66,12 +66,15 @@ public class Main {
             user1.setPcaVector(pca.getStandardUser());
             user1.setTopThree(pca.getTopThree());
             chatBot.loopGeneraTitle(user1 ,pca,pca.getTopThree(), false);
+            System.out.println("Exit");
+            objective = "neutral";
         }
         else if(objective.equalsIgnoreCase(browseMovies)) {
             user1.setUserVector();
             user1.setPcaVector(pca.getStandardUser());
             user1.setTopThree(pca.getTopThree());
             chatBot.loopGeneraTitleMovie(user1 ,pca,pca.getTopThree(), false);
+            objective = "neutral";
         }
         else if(objective.equalsIgnoreCase(request)) {
             System.out.println("Would you like to request for a book or a movie?");
