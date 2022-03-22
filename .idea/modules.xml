@@ -3,7 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Client/A3_client.iml" filepath="$PROJECT_DIR$/Client/A3_client.iml" />
+<<<<<<< Updated upstream
       <module fileurl="file://$PROJECT_DIR$/.idea/Assignment3.iml" filepath="$PROJECT_DIR$/.idea/Assignment3.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/ChatGUI/ChatGUI.iml" filepath="$PROJECT_DIR$/ChatGUI/ChatGUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Stanford/Stanford.iml" filepath="$PROJECT_DIR$/Stanford/Stanford.iml" />
+>>>>>>> Stashed changes
       <module fileurl="file://$PROJECT_DIR$/AIML_Examples/cBOT3.iml" filepath="$PROJECT_DIR$/AIML_Examples/cBOT3.iml" />
       <module fileurl="file://$PROJECT_DIR$/Server/chatLog.iml" filepath="$PROJECT_DIR$/Server/chatLog.iml" />
     </modules>
