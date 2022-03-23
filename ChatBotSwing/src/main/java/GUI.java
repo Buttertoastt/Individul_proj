@@ -15,7 +15,7 @@ public class GUI<JTimer> implements ActionListener {
     static String trivia = "trivia";
     static String request = "request";
     static String objective = "";
-    static String sentiment = "Neural";
+    static String sentiment = "Neutral";
     static String userMsg;
     static String cbMsg;
 
@@ -97,6 +97,7 @@ public class GUI<JTimer> implements ActionListener {
         new GUI();
 
         Library library = new Library();
+        Gallery gallery = new Gallery();
         ChatBot chatBot = new ChatBot();
         Person user1 = new Person();
 
@@ -179,33 +180,60 @@ public class GUI<JTimer> implements ActionListener {
                     cbMsg = "Would you like to request for a book or a movie?";
                     getCBM(cbMsg);
                     getUserIN();
+                    Book b = new Book();
+                    Movie m = new Movie();
                     ParseNLP parseNLP = new ParseNLP(userMsg);
                     ArrayList<String> words = parseNLP.getWords();
                     for(String word : words) {
-                        if(library.byTitle(word).getTitle() == word) {
-                            cbMsg = "Added " + word + " to cart";
-                            continue;
+                        if(word.toLowerCase().contains("book")){
+                            cbMsg = "What is the title of the book?";
+                            getCBM(cbMsg);
+                            getUserIN();
+                            for (int i = 0; i < library.getBookList().size(); i++) {
+                                if(library.getBookList().get(i).getTitle().toLowerCase().contains(userMsg)){
+                                    cbMsg = "Would you like to borrow " + library.getBookList().get(i).getTitle() + "?";
+                                    getCBM(cbMsg);
+                                    getUserIN();
+                                    if(chatBot.testReaction(userMsg)){
+                                        user1.updateTempBookList(library.getBookList().get(i));
+                                        b = library.getBookList().get(i);
+                                        cbMsg = "Added " + library.getBookList().get(i).getTitle() + " to cart";
+                                        break;
+                                    }
+                                }
+
+                            }
+                            if(b.getTitle() == null){
+                                cbMsg = "Sorry, we don't have that one.";
+                                continue;
+                            }
                         }
-                        else {
-                            cbMsg = "Sorry, we don't have that one";
-                            continue;
+                        else if(word.toLowerCase().contains("movie")){
+                            cbMsg = "What is the title of the movie?";
+                            getCBM(cbMsg);
+                            getUserIN();
+                            for (int i = 0; i < gallery.getMovieList().size(); i++) {
+                                if(gallery.getMovieList().get(i).getTitle().toLowerCase().contains(userMsg)){
+                                    cbMsg = "Would you like to borrow " + gallery.getMovieList().get(i).getTitle() + "?";
+                                    getCBM(cbMsg);
+                                    getUserIN();
+                                    if(chatBot.testReaction(userMsg)){
+                                        user1.updateTempMovieList(gallery.getMovieList().get(i));
+                                        m = gallery.getMovieList().get(i);
+                                        cbMsg = "Added " + gallery.getMovieList().get(i).getTitle() + " to cart";
+                                        break;
+                                    }
+                                }
+
+                            }
+                            if(m.getTitle() == null){
+                                cbMsg = "Sorry, we don't have that one.";
+                                continue;
+                            }
                         }
                     }
                 }
-                if (!chatBot.testReaction(userMsg)) {
-
-                    cbMsg = "What is the title of the book you want?";
-                    getCBM(cbMsg);
-                    getUserIN();
-
-                    boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
-                    if (yes) {
-                        objective = request;
-                        break;
-                    } else {
-                        continue;
-                    }
-                }
+                objective = "";
             }
             cbMsg = "Thank you for using this service, would you like to continue browsing?";
             getCBM(cbMsg);
@@ -237,6 +265,11 @@ public class GUI<JTimer> implements ActionListener {
         textArea.append("User: "+userMsg + "\n");
         textInput.setText("");
         IN = true;
+    }
+    public static void conversation(String out) throws InterruptedException {
+        cbMsg = out;
+        getCBM(cbMsg);
+        getUserIN();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
