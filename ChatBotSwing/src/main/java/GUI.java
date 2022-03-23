@@ -22,6 +22,7 @@ public class GUI<JTimer> implements ActionListener {
     static boolean IN = true;
     static boolean outterRun = true;
     static boolean innerRun = true;
+    static Trivia myTrivia;
     //
     Timer timer;
     int cb_user = 0;
@@ -41,46 +42,40 @@ public class GUI<JTimer> implements ActionListener {
     int LEFT = 300;
     int RIGHT = 300;
     public GUI() {
-
-
-
         frame = new JFrame();
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\JJ\\Desktop\\DT\\Programing\\esp32\\Hang Board September 2021\\kivy serial read\\chip.ico"));
-
-
 
         panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(TOP,LEFT,BOT,RIGHT));
         panel.setBackground(new Color(0, 204, 255));
-        panel.setBounds(100, 100, 450, 300);
+        panel.setPreferredSize(new Dimension(450, 650));
 
-        panel.setLayout(new GridLayout(10,6));
+        //panel.setLayout(new GridLayout(10,6));
 
 
         label = new JLabel(String.valueOf(numClicks));
-        textArea = new JTextArea(8,6);
-        textArea.setColumns(9);
-        textArea.setRows(7);
+        textArea = new JTextArea(100,6);
+        textArea.setPreferredSize(new Dimension(400, 300));
+        //textArea.setColumns(9);
+        //textArea.setRows(7);
         //textArea.setAlignmentY(10);
         //textArea.setAlignmentX(7);
         scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(350, 300));
         //scrollPane.setBounds(LEFT,TOP, );
         textInput = new JTextArea(1,8);
-        textInput.setColumns(5);
-        textInput.setRows(1);
+        //textInput.setColumns(5);
+        //textInput.setRows(1);
 
         //scrollPane.setPreferredSize(new Dimension(350, 400));
 
         btnSend = new JButton("Send");
         btnSend.addActionListener(this);
 
-
         panel.add(scrollPane);
         panel.add(textInput);
         panel.add(btnSend);
-        GridLayout gridLayout = new GridLayout(10,10);
-
-
+        //GridLayout gridLayout = new GridLayout(10,10);
 
         frame.add(panel,BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,21 +84,17 @@ public class GUI<JTimer> implements ActionListener {
         frame.pack();
         frame.setVisible(true);
 
-
-
     }
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws InterruptedException {
         new GUI();
-
         Library library = new Library();
         ChatBot chatBot = new ChatBot();
         Person user1 = new Person();
-
         getCBM(chatBot.getStatement(0));
 
-
         while(outterRun) {
+
             while(innerRun) {
                 getCBM("Would you like to: browse books, browse movies, play trivia, or request an item?");
                 getUserIN();
@@ -159,22 +150,29 @@ public class GUI<JTimer> implements ActionListener {
             while(innerRun) {
                 if (objective.equalsIgnoreCase(trivia)) {
                     getCBM("Now starting Trivia :)");
-                    //TODO implement trivia , Rich
-                    getUserIN();
+                    myTrivia = new Trivia();
+                    myTrivia.play();
+
                 } else if (objective.equalsIgnoreCase(browseBooks)) {
+                    cbMsg = "What is your favorite genera?";
+                    getCBM(cbMsg);
+                    getUserIN();
+                    user1.setFavoriteGenera(userMsg);
                     pca = new PCA(user1.getUserVector());
                     user1.setUserVector();
                     user1.setPcaVector(pca.getStandardUser());
                     user1.setTopThree(pca.getTopThree());
                     chatBot.loopGeneraTitle(user1, pca, pca.getTopThree(), false);
-                    System.out.println("Exit");
-                    objective = "";
                 } else if (objective.equalsIgnoreCase(browseMovies)) {
+                    cbMsg = "What is your favorite genera?";
+                    getCBM(cbMsg);
+                    getUserIN();
+                    user1.setFavoriteBook(userMsg);
+                    pca = new PCA(user1.getUserVector());
                     user1.setUserVector();
                     user1.setPcaVector(pca.getStandardUser());
                     user1.setTopThree(pca.getTopThree());
-                    chatBot.loopGeneraTitleMovie(user1, pca, pca.getTopThree(), false);
-                    objective = "";
+                    chatBot.loopGeneraTitle(user1, pca, pca.getTopThree(), false);
                 } else if (objective.equalsIgnoreCase(request)) {
                     cbMsg = "Would you like to request for a book or a movie?";
                     getCBM(cbMsg);
@@ -192,46 +190,33 @@ public class GUI<JTimer> implements ActionListener {
                         }
                     }
                 }
-                if (!chatBot.testReaction(userMsg)) {
+                cbMsg = "Thank you for using this service, would you like to continue browsing?";
+                getCBM(cbMsg);
+                getUserIN();
+                boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
+                if (yes) {
+                    innerRun = true;
+                    outterRun = true;
+                    break;
+                } else {
+                    innerRun = false;
+                    outterRun = false;
+                    break;
 
-                    cbMsg = "What is the title of the book you want?";
-                    getCBM(cbMsg);
-                    getUserIN();
-
-                    boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
-                    if (yes) {
-                        objective = request;
-                        break;
-                    } else {
-                        continue;
-                    }
                 }
             }
-            cbMsg = "Thank you for using this service, would you like to continue browsing?";
-            getCBM(cbMsg);
-            getUserIN();
-            boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
-            if (yes) {
-                innerRun = true;
-                outterRun = true;
-                continue;
-            } else {
-                innerRun = false;
-                outterRun = false;
-                break;
 
-            }
         }
     }
 
-    private static void getCBM(String m) throws InterruptedException {
-        Thread.sleep(100);
+    public static void getCBM(String m) throws InterruptedException {
+        Thread.sleep(10);
         cbMsg = "Chat Bot: "+m+"\n";
         textArea.append(cbMsg);
     }
-    private static void getUserIN() throws InterruptedException {
+    public static void getUserIN() throws InterruptedException {
         while(IN) {
-            Thread.sleep(100);
+            Thread.sleep(10);
         }
         userMsg = textInput.getText().toLowerCase(Locale.ROOT);
         textArea.append("User: "+userMsg + "\n");
