@@ -18,6 +18,7 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Library library = new Library();
         ChatBot chatBot = new ChatBot();
+        Patterns p_quiz = new Patterns()
         Person user1 = new Person();
         PCA pca = new PCA(user1.getUserVector());
         System.out.println(chatBot.getStatement(0));
@@ -62,9 +63,13 @@ public class Main {
 
     }
 
-    public static void mainMenu(ChatBot chatBot, Person user1, PCA pca) throws IOException{
+    public static void mainMenu(ChatBot chatBot, Person user1, PCA pca, Patterns p_quiz) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         if(objective.equalsIgnoreCase(trivia)) {
+            System.out.println("Let's test your skills! Answer 1,2,3,4 to choose your response");
+            user1.setUserVector();
+            user1.setPcaVector(pca.getStandardUser());
+            user1.p_quiz(getQuiz("quiz"));
             //TODO implement trivia , Rich
         }
         else if(objective.equalsIgnoreCase(browseBooks)) {
