@@ -72,8 +72,8 @@ public class Main {
             System.out.println("Let's test your skills! Answer 1,2,3,4 to choose your response");
             user1.setUserVector();
             user1.setPcaVector(pca.getStandardUser());
-            user1.patterns.getTrivia("quiz");
-            //TODO implement trivia , Rich
+            patterns.getTrivia("quiz");
+            objective = "";
         }
         else if(objective.equalsIgnoreCase(browseBooks)) {
             user1.setUserVector();
