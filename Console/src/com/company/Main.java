@@ -26,7 +26,7 @@ public class Main {
         System.out.println(chatBot.getStatement(0));
 
         //System.out.println(option.size());
-        while(!objective.equalsIgnoreCase(exit)){
+        while(!objective.contains(exit)){
             System.out.println("Main menu: browse books, browse movies, play trivia, or request an item?");
             setObjective(chatBot);
             mainMenu(chatBot, user1, pca, library, gallery);
@@ -39,17 +39,18 @@ public class Main {
             }
         }
         else{
-            System.out.println("\n No books borrowed");
+            System.out.println("\nNo books borrowed");
         }
         if(user1.getTempMovieList().size()>0){
             System.out.println("Movies borrowed:");
-            for (int i = 0; i < user1.getTempBookList().size(); i++) {
+            for (int i = 0; i < user1.getTempMovieList().size(); i++) {
                 System.out.println(user1.getTempMovieList().get(i).getMovieDetails());
             }
         }
         else{
-            System.out.println("\n No movies borrowed");
+            System.out.println("\nNo movies borrowed");
         }
+        System.out.println("Enjoy, until next time!");
 
     }
 
@@ -72,18 +73,18 @@ public class Main {
             chatBot.loopGeneraTitleMovie(user1 ,pca,pca.getTopThree(), false);
             objective = "";
         }
-        else if(objective.equalsIgnoreCase(request)) {
+        else if(objective.contains(request)) {
             System.out.println("Would you like to request for a book or a movie?");
             setObjective(chatBot);
-            if(objective.equalsIgnoreCase(browseBooks)){
+            if(objective.contains(browseBooks)){
                 System.out.println("What book would you like to search for? (Enter title)");
-                //Todo search by title
-                //library.byTitle();
+                //Book tempB = new Book();
+                searchByTitle(chatBot, user1, library);
             }
-            else if(objective.equalsIgnoreCase(browseMovies)){
+            else if(objective.contains(browseMovies)){
                 System.out.println("What movie would you like to search for? (Enter title)");
-                //Todo search by title
-                //gallery.byTitle();
+                //Movie tempM = new Movie();
+                searchByTitleMovie(chatBot, user1, gallery);
             }
         }
 
@@ -98,33 +99,17 @@ public class Main {
         parse = new ParseNLP(reader.readLine());
         ArrayList<String> option = parse.getStringList();
         for (String s:option) {
-            if(s.equalsIgnoreCase(browseMovies)){
-                System.out.println("You have selected: browse movies, is that right?");
-                boolean yes = chatBot.testReaction(reader.readLine()); //can pass string here instead
-                if (yes) {
-                    objective = browseMovies;
-                }
+            if(s.contains(browseMovies)){
+                objective = browseMovies;
             }
             else if(s.equalsIgnoreCase(browseBooks)){
-                System.out.println("You have selected: browse books, is that right?");
-                boolean yes = chatBot.testReaction(reader.readLine()); //can pass string here instead
-                if (yes) {
-                    objective = browseBooks;
-                }
+                objective = browseBooks;
             }
             else if(s.equalsIgnoreCase(trivia)){
-                System.out.println("You have selected: trivia, is that right?");
-                boolean yes = chatBot.testReaction(reader.readLine()); //can pass string here instead
-                if (yes) {
-                    objective = trivia;
-                }
+                objective = trivia;
             }
             else if(s.equalsIgnoreCase(request)){
-                System.out.println("You have selected: request a specific item, is that right?");
-                boolean yes = chatBot.testReaction(reader.readLine()); //can pass string here instead
-                if (yes) {
-                    objective = request;
-                }
+                objective = request;
             }
             else if(s.equalsIgnoreCase(exit)){
                 objective = exit;
@@ -132,6 +117,59 @@ public class Main {
             else{
                 objective = unclear;
             }
+        }
+    }
+    public static void searchByTitle(ChatBot chatBot, Person user1 , Library library) throws IOException{
+        Book b = new Book();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        parse = new ParseNLP(reader.readLine());
+        ArrayList<String> option = parse.getStringList();
+        int i = 0;
+        for(String s: option){
+            //String a = s.toLowerCase();
+            //String c = library.getBookList().get(i).getTitle().toLowerCase();
+            //if(c.contains(a)){
+            String a = library.getBookList().get(i).getTitle();
+            if(s.equalsIgnoreCase(a)){
+                System.out.println("Would you like to add "+ a + " to your checkout list?");
+                if(chatBot.testReaction(reader.readLine())){
+                    b = library.getBookList().get(i);
+                    user1.updateTempBookList(b);
+                    System.out.println(b.getTitle() + " successfully added to checkout!");
+                }
+
+            }
+            i++;
+        }
+        if(b.getTitle() == null){
+            System.out.println("Apologies, book not found in library");
+        }
+    }
+    public static void searchByTitleMovie(ChatBot chatBot, Person user1,Gallery gallery) throws IOException{
+        Movie m = new Movie();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        parse = new ParseNLP(reader.readLine());
+        ArrayList<String> option = parse.getStringList();
+        int i = 0;
+        for(String s: option){
+            System.out.println(s);
+
+            //String a = s.toLowerCase();
+            //String c = gallery.getMovieList().get(i).getTitle().toLowerCase();
+            //if(c.contains(a)){
+            String a = gallery.getMovieList().get(i).getTitle();
+            if(s.equalsIgnoreCase(a)){
+                System.out.println("Would you like to add "+ a + " to your checkout list?");
+                if(chatBot.testReaction(reader.readLine())){
+                    m = gallery.getMovieList().get(i);
+                    user1.updateTempMovieList(m);
+                    System.out.println(m.getTitle() + " successfully added to checkout!");
+                }
+            }
+            i++;
+        }
+        if(m.getTitle() == null){
+            System.out.println("Apologies, movie not found in gallery");
         }
     }
 }
