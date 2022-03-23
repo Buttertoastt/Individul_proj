@@ -16,11 +16,14 @@ public class GUI<JTimer> implements ActionListener {
     static String trivia = "trivia";
     static String request = "request";
     static String objective = "";
-    static String sentiment = "Neural";
+    static String sentiment = "Neutral";
     static String userMsg;
     static String cbMsg;
 
     static boolean IN = true;
+    static boolean outterRun = true;
+    static boolean innerRun = true;
+    static Trivia myTrivia;
     //
     Timer timer;
     int cb_user = 0;
@@ -40,46 +43,40 @@ public class GUI<JTimer> implements ActionListener {
     int LEFT = 300;
     int RIGHT = 300;
     public GUI() {
-
-
-
         frame = new JFrame();
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\JJ\\Desktop\\DT\\Programing\\esp32\\Hang Board September 2021\\kivy serial read\\chip.ico"));
-
-
 
         panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(TOP,LEFT,BOT,RIGHT));
         panel.setBackground(new Color(0, 204, 255));
-        panel.setBounds(100, 300, 450, 800);
+        panel.setPreferredSize(new Dimension(450, 650));
 
-        panel.setLayout(new GridLayout(10,6));
+        //panel.setLayout(new GridLayout(10,6));
 
 
         label = new JLabel(String.valueOf(numClicks));
-        textArea = new JTextArea(8,6);
-        textArea.setColumns(9);
-        textArea.setRows(7);
+        textArea = new JTextArea(100,6);
+        textArea.setPreferredSize(new Dimension(400, 300));
+        //textArea.setColumns(9);
+        //textArea.setRows(7);
         //textArea.setAlignmentY(10);
         //textArea.setAlignmentX(7);
         scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(350, 300));
         //scrollPane.setBounds(LEFT,TOP, );
         textInput = new JTextArea(1,8);
-        textInput.setColumns(5);
-        textInput.setRows(1);
+        //textInput.setColumns(5);
+        //textInput.setRows(1);
 
         //scrollPane.setPreferredSize(new Dimension(350, 400));
 
         btnSend = new JButton("Send");
         btnSend.addActionListener(this);
 
-
         panel.add(scrollPane);
         panel.add(textInput);
         panel.add(btnSend);
-        GridLayout gridLayout = new GridLayout(10,10);
-
-
+        //GridLayout gridLayout = new GridLayout(10,10);
 
         frame.add(panel,BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,22 +85,18 @@ public class GUI<JTimer> implements ActionListener {
         frame.pack();
         frame.setVisible(true);
 
-
-
     }
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws InterruptedException {
         new GUI();
-
         Library library = new Library();
+        Gallery gallery = new Gallery();
         ChatBot chatBot = new ChatBot();
         Person user1 = new Person();
-        Trivia trivial = new Trivia();
         getCBM(chatBot.getStatement(0));
 
-        boolean outterRun = true;
-        boolean innerRun = true;
         while(outterRun) {
+
             while(innerRun) {
                 getCBM("Would you like to: browse books, browse movies, play trivia, or request an item?");
                 getUserIN();
@@ -158,53 +151,111 @@ public class GUI<JTimer> implements ActionListener {
             innerRun = true;
             while(innerRun) {
                 if (objective.equalsIgnoreCase(trivia)) {
-                    getCBM("Now starting Trivia :)\nLet's to test your skills! Answer 1,2,3,4 to choose your response\n");
-                    user1.setUserVector();
-                    user1.setPcaVector(pca.getStandardUser());
-                    trivial.play();
+                    getCBM("Now starting Trivia :)");
+                    myTrivia = new Trivia();
+                    myTrivia.play();
 
-                    getUserIN();
                 } else if (objective.equalsIgnoreCase(browseBooks)) {
+                    cbMsg = "What is your favorite genera?";
+                    getCBM(cbMsg);
+                    getUserIN();
+                    user1.setFavoriteGenera(userMsg);
                     pca = new PCA(user1.getUserVector());
                     user1.setUserVector();
                     user1.setPcaVector(pca.getStandardUser());
                     user1.setTopThree(pca.getTopThree());
                     chatBot.loopGeneraTitle(user1, pca, pca.getTopThree(), false);
-                    System.out.println("Exit");
-                    objective = "";
                 } else if (objective.equalsIgnoreCase(browseMovies)) {
+                    cbMsg = "What is your favorite genera?";
+                    getCBM(cbMsg);
+                    getUserIN();
+                    user1.setFavoriteBook(userMsg);
+                    pca = new PCA(user1.getUserVector());
                     user1.setUserVector();
                     user1.setPcaVector(pca.getStandardUser());
                     user1.setTopThree(pca.getTopThree());
-                    chatBot.loopGeneraTitleMovie(user1, pca, pca.getTopThree(), false);
-                    objective = "";
+                    chatBot.loopGeneraTitle(user1, pca, pca.getTopThree(), false);
                 } else if (objective.equalsIgnoreCase(request)) {
-                    System.out.println("Would you like to request for a book or a movie?");
-                    //Todo implement request
+                    cbMsg = "Would you like to request for a book or a movie?";
+                    getCBM(cbMsg);
+                    getUserIN();
+                    Book b = new Book();
+                    Movie m = new Movie();
+                    ParseNLP parseNLP = new ParseNLP(userMsg);
+                    ArrayList<String> words = parseNLP.getWords();
+                    for(String word : words) {
+                        if(word.toLowerCase().contains("book")){
+                            cbMsg = "What is the title of the book?";
+                            getCBM(cbMsg);
+                            getUserIN();
+                            for (int i = 0; i < library.getBookList().size(); i++) {
+                                if(library.getBookList().get(i).getTitle().toLowerCase().contains(userMsg)){
+                                    cbMsg = "Would you like to borrow " + library.getBookList().get(i).getTitle() + "?";
+                                    getCBM(cbMsg);
+                                    getUserIN();
+                                    if(chatBot.testReaction(userMsg)){
+                                        user1.updateTempBookList(library.getBookList().get(i));
+                                        b = library.getBookList().get(i);
+                                        cbMsg = "Added " + library.getBookList().get(i).getTitle() + " to cart";
+                                        break;
+                                    }
+                                }
+
+                            }
+                            if(b.getTitle() == null){
+                                cbMsg = "Sorry, we don't have that one.";
+                                continue;
+                            }
+                        }
+                        else if(word.toLowerCase().contains("movie")){
+                            cbMsg = "What is the title of the movie?";
+                            getCBM(cbMsg);
+                            getUserIN();
+                            for (int i = 0; i < gallery.getMovieList().size(); i++) {
+                                if(gallery.getMovieList().get(i).getTitle().toLowerCase().contains(userMsg)){
+                                    cbMsg = "Would you like to borrow " + gallery.getMovieList().get(i).getTitle() + "?";
+                                    getCBM(cbMsg);
+                                    getUserIN();
+                                    if(chatBot.testReaction(userMsg)){
+                                        user1.updateTempMovieList(gallery.getMovieList().get(i));
+                                        m = gallery.getMovieList().get(i);
+                                        cbMsg = "Added " + gallery.getMovieList().get(i).getTitle() + " to cart";
+                                        break;
+                                    }
+                                }
+
+                            }
+                            if(m.getTitle() == null){
+                                cbMsg = "Sorry, we don't have that one.";
+                                continue;
+                            }
+                        }
+                    }
                 }
-                System.out.println("Thank you for using this service, would you like to continue browsing or exit?");
-                if (!chatBot.testReaction(userMsg)) {
-                    objective = "exit";
-                    innerRun = false;
-                    outterRun = false;
-                }
+                objective = "";
             }
+
         }
     }
 
-    private static void getCBM(String m) throws InterruptedException {
-        Thread.sleep(100);
+    public static void getCBM(String m) throws InterruptedException {
+        Thread.sleep(10);
         cbMsg = "Chat Bot: "+m+"\n";
         textArea.append(cbMsg);
     }
-    private static void getUserIN() throws InterruptedException {
+    public static void getUserIN() throws InterruptedException {
         while(IN) {
-            Thread.sleep(100);
+            Thread.sleep(10);
         }
         userMsg = textInput.getText().toLowerCase(Locale.ROOT);
         textArea.append("User: "+userMsg + "\n");
         textInput.setText("");
         IN = true;
+    }
+    public static void conversation(String out) throws InterruptedException {
+        cbMsg = out;
+        getCBM(cbMsg);
+        getUserIN();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
