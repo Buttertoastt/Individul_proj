@@ -11,13 +11,17 @@ public class Main {
     static String browseBooks = "books";
     static String trivia = "trivia";
     static String request = "request";
+    static String unclear = "unclear";
+    static String exit = "exit";
     static String objective = "";
     static String sentiment = "Neutral";
 
     public static void main(String[] args) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Library library = new Library();
+        Gallery gallery = new Gallery();
         ChatBot chatBot = new ChatBot();
+        Patterns patterns = new Patterns();
         Person user1 = new Person();
         PCA pca = new PCA(user1.getUserVector());
         System.out.println(chatBot.getStatement(0));
@@ -62,17 +66,20 @@ public class Main {
 
     }
 
-    public static void mainMenu(ChatBot chatBot, Person user1, PCA pca) throws IOException{
+    public static void mainMenu(ChatBot chatBot, Person user1, PCA pca, Gallery gallery, Patterns patterns) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         if(objective.equalsIgnoreCase(trivia)) {
-            //TODO implement trivia , Rich
+            System.out.println("Let's test your skills! Answer 1,2,3,4 to choose your response");
+            user1.setUserVector();
+            user1.setPcaVector(pca.getStandardUser());
+            patterns.getTrivia("trivia");
+            objective = "";
         }
         else if(objective.equalsIgnoreCase(browseBooks)) {
             user1.setUserVector();
             user1.setPcaVector(pca.getStandardUser());
             user1.setTopThree(pca.getTopThree());
             chatBot.loopGeneraTitle(user1 ,pca,pca.getTopThree(), false);
-            System.out.println("Exit");
             objective = "";
         }
         else if(objective.equalsIgnoreCase(browseMovies)) {
@@ -82,13 +89,103 @@ public class Main {
             chatBot.loopGeneraTitleMovie(user1 ,pca,pca.getTopThree(), false);
             objective = "";
         }
-        else if(objective.equalsIgnoreCase(request)) {
+        else if(objective.contains(request)) {
             System.out.println("Would you like to request for a book or a movie?");
-            //Todo implement request
+            setObjective(chatBot);
+            if(objective.contains(browseBooks)){
+                System.out.println("What book would you like to search for? (Enter title)");
+                //Book tempB = new Book();
+                searchByTitle(chatBot, user1, library);
+            }
+            else if(objective.contains(browseMovies)){
+                System.out.println("What movie would you like to search for? (Enter title)");
+                //Movie tempM = new Movie();
+                searchByTitleMovie(chatBot, user1, gallery);
+            }
         }
+
         System.out.println("Thank you for using this service, would you like to continue browsing or exit?");
-        if(!chatBot.testReaction(reader.readLine())){
-            objective = "exit";
+        setObjective(chatBot);
+
+
+    }
+
+    public static void setObjective(ChatBot chatBot) throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        parse = new ParseNLP(reader.readLine());
+        ArrayList<String> option = parse.getStringList();
+        for (String s:option) {
+            if(s.contains(browseMovies)){
+                objective = browseMovies;
+            }
+            else if(s.equalsIgnoreCase(browseBooks)){
+                objective = browseBooks;
+            }
+            else if(s.equalsIgnoreCase(trivia)){
+                objective = trivia;
+            }
+            else if(s.equalsIgnoreCase(request)){
+                objective = request;
+            }
+            else if(s.equalsIgnoreCase(exit)){
+                objective = exit;
+            }
+            else{
+                objective = unclear;
+            }
+        }
+    }
+    public static void searchByTitle(ChatBot chatBot, Person user1 , Library library) throws IOException{
+        Book b = new Book();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        parse = new ParseNLP(reader.readLine());
+        ArrayList<String> option = parse.getStringList();
+        int i = 0;
+        for(String s: option){
+            //String a = s.toLowerCase();
+            //String c = library.getBookList().get(i).getTitle().toLowerCase();
+            //if(c.contains(a)){
+            String a = library.getBookList().get(i).getTitle();
+            if(s.equalsIgnoreCase(a)){
+                System.out.println("Would you like to add "+ a + " to your checkout list?");
+                if(chatBot.testReaction(reader.readLine())){
+                    b = library.getBookList().get(i);
+                    user1.updateTempBookList(b);
+                    System.out.println(b.getTitle() + " successfully added to checkout!");
+                }
+
+            }
+            i++;
+        }
+        if(b.getTitle() == null){
+            System.out.println("Apologies, book not found in library");
+        }
+    }
+    public static void searchByTitleMovie(ChatBot chatBot, Person user1,Gallery gallery) throws IOException{
+        Movie m = new Movie();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        parse = new ParseNLP(reader.readLine());
+        ArrayList<String> option = parse.getStringList();
+        int i = 0;
+        for(String s: option){
+            System.out.println(s);
+
+            //String a = s.toLowerCase();
+            //String c = gallery.getMovieList().get(i).getTitle().toLowerCase();
+            //if(c.contains(a)){
+            String a = gallery.getMovieList().get(i).getTitle();
+            if(s.equalsIgnoreCase(a)){
+                System.out.println("Would you like to add "+ a + " to your checkout list?");
+                if(chatBot.testReaction(reader.readLine())){
+                    m = gallery.getMovieList().get(i);
+                    user1.updateTempMovieList(m);
+                    System.out.println(m.getTitle() + " successfully added to checkout!");
+                }
+            }
+            i++;
+        }
+        if(m.getTitle() == null){
+            System.out.println("Apologies, movie not found in gallery");
         }
     }
 }
