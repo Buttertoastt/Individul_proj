@@ -50,7 +50,7 @@ public class GUI<JTimer> implements ActionListener {
         panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(TOP,LEFT,BOT,RIGHT));
         panel.setBackground(new Color(0, 204, 255));
-        panel.setBounds(100, 100, 450, 300);
+        panel.setBounds(100, 300, 450, 800);
 
         panel.setLayout(new GridLayout(10,6));
 
