@@ -10,6 +10,7 @@ public class GUI<JTimer> implements ActionListener {
     //
     static PCA pca;
     static ParseNLP parse;
+
     static String browseMovies = "movies";
     static String browseBooks = "books";
     static String trivia = "trivia";
@@ -231,24 +232,7 @@ public class GUI<JTimer> implements ActionListener {
                         }
                     }
                 }
-<<<<<<< HEAD
-                cbMsg = "Thank you for using this service, would you like to continue browsing?";
-                getCBM(cbMsg);
-                getUserIN();
-                boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
-                if (yes) {
-                    innerRun = true;
-                    outterRun = true;
-                    break;
-                } else {
-                    innerRun = false;
-                    outterRun = false;
-                    break;
-
-                }
-=======
                 objective = "";
->>>>>>> cc6f5abcf920f29403d15050613e8d8c6ce91b64
             }
 
         }

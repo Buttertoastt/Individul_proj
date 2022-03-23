@@ -67,8 +67,8 @@ public class ChatBot {
 				System.out.println("That's great!");
 				ArrayList<String> titles = library.getTitleList(library.getGeneraList(s));
 				for (String t:titles) {
-					System.out.println("Can i suggest: ");
-					System.out.println(t + "?");
+					System.out.println("Can i suggest ");
+					System.out.print(t + "? \n");
 					String reply2 = sc.next();
 					addToCart = testReaction(reply2);
 					if(addToCart) {
@@ -107,8 +107,8 @@ public class ChatBot {
 				System.out.println("That's great!");
 				ArrayList<String> titles = gallery.getTitleList(gallery.getGeneraList(s));
 				for (String t:titles) {
-					System.out.println("Can i suggest: ");
-					System.out.println(t + "?");
+					System.out.println("Can i suggest ");
+					System.out.print(t + "? \n");
 					String reply2 = sc.next();
 					addToCart = testReaction(reply2);
 					if(addToCart) {
