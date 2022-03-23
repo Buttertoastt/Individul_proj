@@ -2,12 +2,12 @@ import java.lang.String;
 import java.util.*;
 
 
-public class quizQuestion {
+public class TriviaQuestion {
     private String prompt;
     private ArrayList<String> options;
     private String answer;
 
-    public quizQuestion(String prompt, String[] options, String answer) {
+    public TriviaQuestion(String prompt, String[] options, String answer) {
         this.prompt = prompt;
         this.options = new ArrayList<String>();
         this.answer = answer;
@@ -18,7 +18,7 @@ public class quizQuestion {
         Collections.shuffle(this.options);
         this.answer = answer;
     }
-    public String getQuizQuestion(){
+    public String getTriviaQuestion(){
         return prompt;
     }
     public ArrayList<String> getOptions(){

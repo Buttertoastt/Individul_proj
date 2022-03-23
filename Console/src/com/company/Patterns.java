@@ -7,7 +7,7 @@ public class Patterns {
   //ChatBot chatBot = new ChatBot();
   Person user1 = new Person();
   Library lb = new Library();
-  Quiz q = new Quiz();
+  Trivia trivia = new Trivia();
   ArrayList<Book> bk = new ArrayList<>();
 
   /*
@@ -79,17 +79,18 @@ public class Patterns {
     return s;
 }
 */
-  public String getQuiz(String sentence) {
-    String response = sentence;
+public String getTrivia(String sentence) {
+  String response = sentence;
 
-    if (findKeyword(response, "quiz") >= 0 || findKeyword(response, "test") >= 0 ||
-            findKeyword(response, "tst") >= 0) {
-      response = "";q.play();
-    }
-    return response;
+  if (findKeyword(response, "quiz") >= 0 || findKeyword(response, "test") >= 0 ||
+          findKeyword(response, "tst") >= 0) {
+    response = "";trivia.play();
   }
+  return response;
+}
 
-/*
+
+  /*
   //Agent responds based on user's response
   public String getResponse(String sentence) {
     String response = sentence;

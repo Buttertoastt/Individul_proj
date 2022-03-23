@@ -7,7 +7,7 @@ public class Patterns {
   Person user1 = new Person();
   Trivia trivia = new Trivia();
 
-  public String getQuiz(String sentence) {
+  public String getTrivia(String sentence) {
     String response = sentence;
 
     if (findKeyword(response, "quiz") >= 0 || findKeyword(response, "test") >= 0 ||
