@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ChatBotSwing/ChatBotNlp.iml" filepath="$PROJECT_DIR$/ChatBotSwing/ChatBotNlp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Open/Open.iml" filepath="$PROJECT_DIR$/Open/Open.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChatGUI/ChatGUI.iml" filepath="$PROJECT_DIR$/ChatGUI/ChatGUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/Server/chatLog.iml" filepath="$PROJECT_DIR$/Server/chatLog.iml" />
     </modules>
   </component>

@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="chatLog" />
+        <module name="ChatGUI" />
         <module name="ChatBotNlp" />
-        <module name="Open" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -16,9 +16,8 @@
       <module name="cBOT3" target="17" />
       <module name="ChatBotGUI" target="8" />
       <module name="ChatBotNlp" target="17" />
-      <module name="ChatGUI" target="14" />
+      <module name="ChatGUI" target="1.5" />
       <module name="chatLog" target="17" />
-      <module name="Open" target="17" />
       <module name="Stanford" target="14" />
     </bytecodeTargetLevel>
   </component>
