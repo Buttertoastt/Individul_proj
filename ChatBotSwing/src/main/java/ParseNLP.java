@@ -16,7 +16,6 @@ public class ParseNLP {
         stanfordCoreNLP = Pipeline.getPipeline();
         coreDocument = new CoreDocument(input);
         stanfordCoreNLP.annotate(coreDocument);
-
         coreLabelList = coreDocument.tokens();
     }
     public List<CoreSentence> getSentences(){
@@ -62,7 +61,7 @@ public class ParseNLP {
     }
     //pos is the code which represents what the word is
     //ie NN = Noun, singular or mass
-    //seeinfo_pos.txt
+    //see info_pos.txt
     public ArrayList<String> getPosList() {
         ArrayList<String> posList = new ArrayList<>();
         String pos = "";
@@ -71,6 +70,22 @@ public class ParseNLP {
             posList.add(pos);
         }
         return posList;
+    }
+
+    public void addCorelabel(String input){
+
+    }
+
+    public String getSentiment() {
+        String sentiment = "Neutral";
+        getSentences();
+        for(CoreSentence sentence: sentenceList) {
+            if(sentence.sentiment().length()>1) {
+                sentiment = sentence.sentiment();
+            }
+            System.out.println(sentiment);
+        }
+        return sentiment;
     }
 
 }
