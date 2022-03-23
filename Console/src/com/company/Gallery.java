@@ -5,7 +5,7 @@ public class Gallery {
     private ArrayList<Movie> movieList = new ArrayList<>();
     public Gallery() {
         movieList.add(new Movie("Eternals", "Action", 2021, 2.62));
-        movieList.add(new Movie("Dune", "Sci-Fi", 2021, 2.58));
+        movieList.add(new Movie("Star Wars", "Sci-Fi", 2021, 2.58));
         movieList.add(new Movie("Perfect Blue", "Drama", 1998, 2));
         movieList.add(new Movie("Howl's Moving Castle - The Animation", "Fantasy", 2004, 2));
         movieList.add(new Movie("The Fellowship of The Rings", "Fantasy", 2001, 3));
