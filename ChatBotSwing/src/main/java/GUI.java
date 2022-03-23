@@ -20,8 +20,7 @@ public class GUI<JTimer> implements ActionListener {
     static String cbMsg;
 
     static boolean IN = true;
-    static boolean outterRun = true;
-    static boolean innerRun = true;
+
     static Trivia myTrivia;
     //
     Timer timer;
@@ -77,14 +76,16 @@ public class GUI<JTimer> implements ActionListener {
     public static void main(String[] args) throws InterruptedException {
         new GUI();
         Library library = new Library();
+        Gallery gallery = new Gallery();
         ChatBot chatBot = new ChatBot();
         Person user1 = new Person();
         getCBM(chatBot.getStatement(0));
-
+        boolean outterRun = true;
+        boolean innerRun = true;
 
         while(outterRun) {
 
-            while(innerRun) {
+            while(true) {
                 getCBM("Would you like to: browse books, browse movies, play trivia, or request an item?");
                 getUserIN();
                 parse = new ParseNLP(userMsg);
@@ -100,7 +101,6 @@ public class GUI<JTimer> implements ActionListener {
                         continue;
                     }
                 } else if (option.contains(browseBooks)) {
-
                     getCBM("You have selected: browse books, is that right?");
                     getUserIN();
                     boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
@@ -132,17 +132,18 @@ public class GUI<JTimer> implements ActionListener {
                         continue;
                     }
                 }
+                else{
+                    //todo handling unexpected inputs
+                }
             }
             System.out.println("Done initial branch: " + objective);
-            outterRun = true;
-            innerRun = true;
             while(innerRun) {
                 if (objective.equalsIgnoreCase(trivia)) {
                     getCBM("Now starting Trivia :)");
                     myTrivia = new Trivia();
                     myTrivia.play();
-
-                } else if (objective.equalsIgnoreCase(browseBooks)) {
+                }
+                else if (objective.equalsIgnoreCase(browseBooks)) {
                     cbMsg = "What is your favorite genera?";
                     getCBM(cbMsg);
                     getUserIN();
@@ -152,7 +153,8 @@ public class GUI<JTimer> implements ActionListener {
                     user1.setPcaVector(pca.getStandardUser());
                     user1.setTopThree(pca.getTopThree());
                     chatBot.loopGeneraTitle(user1, pca, pca.getTopThree(), false);
-                } else if (objective.equalsIgnoreCase(browseMovies)) {
+                }
+                else if (objective.equalsIgnoreCase(browseMovies)) {
                     cbMsg = "What is your favorite genera?";
                     getCBM(cbMsg);
                     getUserIN();
@@ -162,35 +164,65 @@ public class GUI<JTimer> implements ActionListener {
                     user1.setPcaVector(pca.getStandardUser());
                     user1.setTopThree(pca.getTopThree());
                     chatBot.loopGeneraTitleMovie(user1, pca, pca.getTopThree(), false);
-                } else if (objective.equalsIgnoreCase(request)) {
-                    cbMsg = "What book would you like to search for?";
+                }
+                else if (objective.equalsIgnoreCase(request)) {
+                    cbMsg = "Would you like to request for a book or a movie?";
                     getCBM(cbMsg);
                     getUserIN();
                     ParseNLP parseNLP = new ParseNLP(userMsg);
                     ArrayList<String> words = parseNLP.getWords();
-                    boolean hit = false;
-                    String search = " ";
+                    String search = "";
                     for(String word : words) {
-                        System.out.println(word);
-                        if(library.byTitle(word).getTitle()!=null) {
-                            hit = true;
-                            search = word;
+                        if(word.toLowerCase().contains("book")){
+                            cbMsg = "What is the title of the book?";
+                            getCBM(cbMsg);
+                            getUserIN();
+                            for (int i = 0; i < library.getBookList().size(); i++) {
+                                //getCBM("in1");
+                                if(library.getBookList().get(i).getTitle().toLowerCase().contains(userMsg.toLowerCase())){
+                                    search = library.getBookList().get(i).getTitle();
+                                    user1.updateTempBookList(library.getBookList().get(i));
+                                    cbMsg = "Added " + search + " to cart";
+                                    getCBM(cbMsg);
+                                    break;
+                                }
+
+                            }
+                            if(search == null){
+                                cbMsg = "Sorry, we don't have that one.";
+                                getCBM(cbMsg);
+                                break;
+                            }
+                            break;
                         }
-                    }
-                    if(hit) {
-                        cbMsg = "Added " + search + " to cart";
-                        getCBM(cbMsg);
-                    }
-                    else {
-                        cbMsg = "Sorry, we don't have that one";
-                        getCBM(cbMsg);
+                        else if(word.toLowerCase().contains("movie")){
+                            cbMsg = "What is the title of the movie?";
+                            getCBM(cbMsg);
+                            getUserIN();
+                            for (int i = 0; i < gallery.getMovieList().size(); i++) {
+                                //getCBM("in2");
+                                if(gallery.getMovieList().get(i).getTitle().toLowerCase().contains(userMsg.toLowerCase())){
+                                    search = gallery.getMovieList().get(i).getTitle();
+                                    user1.updateTempMovieList(gallery.getMovieList().get(i));
+                                    cbMsg = "Added " + search + " to cart";
+                                    getCBM(cbMsg);
+                                    break;
+                                }
+                            }
+                            if(search == null){
+                                cbMsg = "Sorry, we don't have that one.";
+                                getCBM(cbMsg);
+                                break;
+                            }
+                            break;
+                        }
                     }
                 }
                 cbMsg = "Thank you for using this service, would you like to continue browsing?";
                 getCBM(cbMsg);
                 getUserIN();
                 boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
-                if (yes) {
+                if(yes) {
                     innerRun = true;
                     outterRun = true;
                     break;
@@ -198,12 +230,33 @@ public class GUI<JTimer> implements ActionListener {
                     innerRun = false;
                     outterRun = false;
                     break;
-
                 }
             }
 
         }
+        //Print books and movies borrowed during session.
+        if(user1.getTempBookList().size()>0){
+            getCBM("Books borrowed:");
+            for (int i = 0; i < user1.getTempBookList().size(); i++) {
+                getCBM(user1.getTempBookList().get(i).getBookDetails());
+            }
+        }
+        else{
+            getCBM("\nNo books borrowed");
+        }
+        if(user1.getTempMovieList().size()>0){
+            getCBM("Movies borrowed:");
+            for (int i = 0; i < user1.getTempMovieList().size(); i++) {
+                getCBM(user1.getTempMovieList().get(i).getMovieDetails());
+            }
+        }
+        else{
+            getCBM("\nNo movies borrowed");
+        }
+        getCBM("Enjoy, until next time!");
+
     }
+
 
     public static void getCBM(String m) throws InterruptedException {
         Thread.sleep(10);
