@@ -19,8 +19,9 @@ public class Main {
     public static void main(String[] args) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Library library = new Library();
-        Gallery gallery = new Gallery();        ChatBot chatBot = new ChatBot();
-        Patterns p_quiz = new Patterns();
+        Gallery gallery = new Gallery();
+        ChatBot chatBot = new ChatBot();
+        Patterns patterns = new Patterns();
         Person user1 = new Person();
         PCA pca = new PCA(user1.getUserVector());
         System.out.println(chatBot.getStatement(0));
@@ -65,13 +66,13 @@ public class Main {
 
     }
 
-    public static void mainMenu(ChatBot chatBot, Person user1, PCA pca, Gallery gallery, Patterns p_quiz) throws IOException{
+    public static void mainMenu(ChatBot chatBot, Person user1, PCA pca, Gallery gallery, Patterns patterns) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         if(objective.equalsIgnoreCase(trivia)) {
             System.out.println("Let's test your skills! Answer 1,2,3,4 to choose your response");
             user1.setUserVector();
             user1.setPcaVector(pca.getStandardUser());
-            user1.p_quiz(getQuiz("quiz"));
+            user1.patterns.getQuiz("quiz");
             //TODO implement trivia , Rich
         }
         else if(objective.equalsIgnoreCase(browseBooks)) {
