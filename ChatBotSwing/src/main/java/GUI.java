@@ -10,7 +10,7 @@ public class GUI<JTimer> implements ActionListener {
     //
     static PCA pca;
     static ParseNLP parse;
-
+    static Trivia trivial;
     static String browseMovies = "movies";
     static String browseBooks = "books";
     static String trivia = "trivia";
@@ -98,7 +98,6 @@ public class GUI<JTimer> implements ActionListener {
         Library library = new Library();
         ChatBot chatBot = new ChatBot();
         Person user1 = new Person();
-        Trivia trivial = new Trivia();
         getCBM(chatBot.getStatement(0));
 
         boolean outterRun = true;
@@ -158,12 +157,10 @@ public class GUI<JTimer> implements ActionListener {
             innerRun = true;
             while(innerRun) {
                 if (objective.equalsIgnoreCase(trivia)) {
+                    pca = new PCA(user1.getUserVector());
                     getCBM("Now starting Trivia :)\nLet's to test your skills! Answer 1,2,3,4 to choose your response\n");
-                    user1.setUserVector();
-                    user1.setPcaVector(pca.getStandardUser());
-                    trivial.play();
 
-                    getUserIN();
+
                 } else if (objective.equalsIgnoreCase(browseBooks)) {
                     pca = new PCA(user1.getUserVector());
                     user1.setUserVector();
