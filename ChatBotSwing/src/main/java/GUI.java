@@ -84,7 +84,7 @@ public class GUI<JTimer> implements ActionListener {
         boolean innerRun = true;
 
         while(outterRun) {
-
+ 
             while(true) {
                 getCBM("Would you like to: browse books, browse movies, play trivia, or request an item?");
                 getUserIN();
@@ -232,7 +232,6 @@ public class GUI<JTimer> implements ActionListener {
                     break;
                 }
             }
-
         }
         //Print books and movies borrowed during session.
         if(user1.getTempBookList().size()>0){
