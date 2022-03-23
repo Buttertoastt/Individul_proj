@@ -7,12 +7,15 @@ public class Person {
     private String favoriteBook;
     private String favoriteGenera;
     private int [] pcaVector;
-    String [] generas = new String[] {"sci-fi","Romance","Action","Comedy", "Education","Classic","Horror"};
+    Library lib = new Library();
+    String [] generas = lib.getAllGeneras();
     ArrayList<String> topThree = new ArrayList<>();
     private int [] userVector = new int[generas.length];
-    private ArrayList<Book> tempList = new ArrayList<Book>();
-    private ArrayList<Book> permList = new ArrayList<Book>();
-    ArrayList<Book> chechOut = new ArrayList<>();
+    private ArrayList<Book> tempBookList = new ArrayList<Book>();
+    private ArrayList<Movie> tempMovieList = new ArrayList<Movie>();
+    private ArrayList<Book> permBookList = new ArrayList<Book>();
+    public ArrayList<Book> checkOut = new ArrayList<>();
+
     public ArrayList<Book> getCheckOut() {
         return checkOut;
     }
@@ -21,7 +24,6 @@ public class Person {
         this.checkOut = checkOut;
     }
 
-    private ArrayList<Book> checkOut = new ArrayList<>();
 
     public ArrayList<String> getTopThree() {
         return topThree;
@@ -68,9 +70,25 @@ public class Person {
         this.favoriteGenera = favoriteGenera;
     }
     public Person() {
-
+        this.favoriteGenera = "action";
     }
 
+
+
+
+    public void updateTempBookList(Book b){
+        tempBookList.add(b);
+    }
+    public void updateTempMovieList(Movie m){
+        tempMovieList.add(m);
+    }
+    public void removeTempBookList(Book b){
+        for (int i = 0; i < tempBookList.size(); i++) {
+            if(tempBookList.get(i).getTitle().equalsIgnoreCase(b.getTitle())){
+                tempBookList.remove(i);
+            }
+        }
+    }
     public String getName() {
         return name;
     }
@@ -110,33 +128,13 @@ public class Person {
     public void setFavoriteGenera(String favoriteGenera) {
         this.favoriteGenera = favoriteGenera;
     }
-    public ArrayList<Book> getTempList(){
-        return tempList;
+    public ArrayList<Book> getTempBookList(){
+        return tempBookList;
     }
-    public ArrayList<Book> getPermList(){
-        return permList;
+    public ArrayList<Movie> getTempMovieList(){
+        return tempMovieList;
     }
 
-    public void updateTempList(Book b){
-        tempList.add(b);
-    }
-    public void removeTempList(Book b){
-        for (int i = 0; i < tempList.size(); i++) {
-            if(tempList.get(i).getTitle().equalsIgnoreCase(b.getTitle())){
-                tempList.remove(i);
-            }
-        }
-    }
-    public void updatePermList(Book b){
-        permList.add(b);
-    }
-    public void removePermList(Book b){
-        for (int i = 0; i < permList.size(); i++) {
-            if(permList.get(i).getTitle().equalsIgnoreCase(b.getTitle())){
-                permList.remove(i);
-            }
-        }
-    }
 
 
 }

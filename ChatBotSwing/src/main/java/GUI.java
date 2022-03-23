@@ -3,10 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class GUI<JTimer> implements ActionListener {
     //
+    static PCA pca;
     static ParseNLP parse;
     static String browseMovies = "movies";
     static String browseBooks = "books";
@@ -37,28 +39,45 @@ public class GUI<JTimer> implements ActionListener {
     int LEFT = 300;
     int RIGHT = 300;
     public GUI() {
+
+
+
         frame = new JFrame();
-        btnSend = new JButton("Send");
-        btnSend.addActionListener(this);
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\JJ\\Desktop\\DT\\Programing\\esp32\\Hang Board September 2021\\kivy serial read\\chip.ico"));
 
-        label = new JLabel(String.valueOf(numClicks));
-
-        textArea = new JTextArea(100,2);
-        scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(150,TOP-50, 250,100);
-        textInput = new JTextArea(1,2);
-        textInput.setTabSize(2);
-
-        scrollPane.setPreferredSize(new Dimension(450, 110));
 
 
         panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(TOP,LEFT,BOT,RIGHT));
-        panel.setLayout(new GridLayout(4,2));
-        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.setBackground(new Color(0, 204, 255));
+        panel.setBounds(100, 100, 450, 300);
+
+        panel.setLayout(new GridLayout(10,6));
+
+
+        label = new JLabel(String.valueOf(numClicks));
+        textArea = new JTextArea(8,6);
+        textArea.setColumns(9);
+        textArea.setRows(7);
+        //textArea.setAlignmentY(10);
+        //textArea.setAlignmentX(7);
+        scrollPane = new JScrollPane(textArea);
+        //scrollPane.setBounds(LEFT,TOP, );
+        textInput = new JTextArea(1,8);
+        textInput.setColumns(5);
+        textInput.setRows(1);
+
+        //scrollPane.setPreferredSize(new Dimension(350, 400));
+
+        btnSend = new JButton("Send");
+        btnSend.addActionListener(this);
+
+
+        panel.add(scrollPane);
         panel.add(textInput);
         panel.add(btnSend);
-        panel.add(label);
+        GridLayout gridLayout = new GridLayout(10,10);
+
 
 
         frame.add(panel,BorderLayout.CENTER);
@@ -78,81 +97,113 @@ public class GUI<JTimer> implements ActionListener {
         Library library = new Library();
         ChatBot chatBot = new ChatBot();
         Person user1 = new Person();
-        cbMsg = "Chat Bot:  " +chatBot.getStatement(0)+"\n";
 
-        textArea.append(cbMsg);
-        cbMsg = "Chat Bot: Would you like to: browse books, browse movies, play trivia, or request an item?\n";
-        textArea.append(cbMsg);
-        getUserIN();
-/*        while(IN) {
-            Thread.sleep(100);
-        }
-        userMsg = textInput.getText();
-        textArea.append(cbMsg);*/
+        getCBM(chatBot.getStatement(0));
 
-        parse = new ParseNLP(userMsg);
+        boolean outterRun = true;
+        boolean innerRun = true;
+        while(outterRun) {
+            while(innerRun) {
+                getCBM("Would you like to: browse books, browse movies, play trivia, or request an item?");
+                getUserIN();
+                parse = new ParseNLP(userMsg);
+                ArrayList<String> option = parse.getStringList();
+                if (option.contains(browseMovies)) {
+                    getCBM("You have selected: browse movies, is that right?");
+                    getUserIN();
+                    boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
+                    if (yes) {
+                        objective = browseMovies;
+                        break;
+                    } else {
+                        continue;
+                    }
+                } else if (option.contains(browseBooks)) {
 
-        ArrayList<String> option = parse.getStringList();
-        for (String s:option) {
-            if(s.equalsIgnoreCase(browseMovies)){
-                cbMsg = "Chat Bot: You have selected: browse movies, is that right?\n";
-                textArea.append(cbMsg);
-                while(IN) {
-                    Thread.sleep(100);
-                }
+                    getCBM("You have selected: browse books, is that right?");
+                    getUserIN();
+                    boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
+                    if (yes) {
+                        objective = browseBooks;
+                        break;
+                    } else {
+                        continue;
+                    }
 
-                boolean yes = chatBot.testReaction(sc.nextLine()); //can pass string here instead
-                if (yes) {
-                    objective = browseMovies;
+                } else if (option.contains(trivia)) {
+                    getCBM("You have selected: trivia, is that right?");
+                    getUserIN();
+                    boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
+                    if (yes) {
+                        objective = trivia;
+                        break;
+                    } else {
+                        continue;
+                    }
+                } else if (option.contains(request)) {
+                    getCBM("You have selected: request a specific item, is that right?");
+                    getUserIN();
+                    boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
+                    if (yes) {
+                        objective = request;
+                        break;
+                    } else {
+                        continue;
+                    }
                 }
             }
-            else if(s.equalsIgnoreCase(browseBooks)){
-                cbMsg = "Chat Bot: You have selected: browse books, is that right?\n";
-                textArea.append(cbMsg);
-                boolean yes = chatBot.testReaction(sc.nextLine()); //can pass string here instead
-                if (yes) {
-                    objective = browseBooks;
+            System.out.println("Done initial branch: " + objective);
+            outterRun = true;
+            innerRun = true;
+            while(innerRun) {
+                if (objective.equalsIgnoreCase(trivia)) {
+                    getCBM("Now starting Trivia :)");
+                    //TODO implement trivia , Rich
+                    getUserIN();
+                } else if (objective.equalsIgnoreCase(browseBooks)) {
+                    pca = new PCA(user1.getUserVector());
+                    user1.setUserVector();
+                    user1.setPcaVector(pca.getStandardUser());
+                    user1.setTopThree(pca.getTopThree());
+                    chatBot.loopGeneraTitle(user1, pca, pca.getTopThree(), false);
+                    System.out.println("Exit");
+                    objective = "";
+                } else if (objective.equalsIgnoreCase(browseMovies)) {
+                    user1.setUserVector();
+                    user1.setPcaVector(pca.getStandardUser());
+                    user1.setTopThree(pca.getTopThree());
+                    chatBot.loopGeneraTitleMovie(user1, pca, pca.getTopThree(), false);
+                    objective = "";
+                } else if (objective.equalsIgnoreCase(request)) {
+                    System.out.println("Would you like to request for a book or a movie?");
+                    //Todo implement request
                 }
-            }
-            else if(s.equalsIgnoreCase(trivia)){
-                cbMsg = "Chat Bot: You have selected: trivia, is that right?\n";
-                textArea.append(cbMsg);
-                boolean yes = chatBot.testReaction(sc.nextLine()); //can pass string here instead
-                if (yes) {
-                    objective = trivia;
-                }
-            }
-            else if(s.equalsIgnoreCase(request)){
-                cbMsg = "Chat Bot: You have selected: request a specific item, is that right?\n";
-                textArea.append(cbMsg);
-                boolean yes = chatBot.testReaction(sc.nextLine()); //can pass string here instead
-                if (yes) {
-                    objective = request;
+                System.out.println("Thank you for using this service, would you like to continue browsing or exit?");
+                if (!chatBot.testReaction(userMsg)) {
+                    objective = "exit";
+                    innerRun = false;
+                    outterRun = false;
                 }
             }
         }
     }
 
+    private static void getCBM(String m) throws InterruptedException {
+        Thread.sleep(100);
+        cbMsg = "Chat Bot: "+m+"\n";
+        textArea.append(cbMsg);
+    }
     private static void getUserIN() throws InterruptedException {
         while(IN) {
             Thread.sleep(100);
         }
-
-        userMsg = textInput.getText();
-        textArea.append(cbMsg);
+        userMsg = textInput.getText().toLowerCase(Locale.ROOT);
+        textArea.append("User: "+userMsg + "\n");
+        textInput.setText("");
+        IN = true;
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         IN = false;
-        /*numClicks++;
-        label.setText(String.valueOf(numClicks));*/
-        userMsg = textInput.getText();
-        textArea.append("User: " + userMsg +  "\n");
-
-
-
     }
-
-
 }
