@@ -20,6 +20,8 @@ public class GUI<JTimer> implements ActionListener {
     static String cbMsg;
 
     static boolean IN = true;
+    static boolean outterRun = true;
+    static boolean innerRun = true;
     //
     Timer timer;
     int cb_user = 0;
@@ -100,8 +102,7 @@ public class GUI<JTimer> implements ActionListener {
 
         getCBM(chatBot.getStatement(0));
 
-        boolean outterRun = true;
-        boolean innerRun = true;
+
         while(outterRun) {
             while(innerRun) {
                 getCBM("Would you like to: browse books, browse movies, play trivia, or request an item?");
@@ -175,15 +176,50 @@ public class GUI<JTimer> implements ActionListener {
                     chatBot.loopGeneraTitleMovie(user1, pca, pca.getTopThree(), false);
                     objective = "";
                 } else if (objective.equalsIgnoreCase(request)) {
-                    System.out.println("Would you like to request for a book or a movie?");
-                    //Todo implement request
+                    cbMsg = "Would you like to request for a book or a movie?";
+                    getCBM(cbMsg);
+                    getUserIN();
+                    ParseNLP parseNLP = new ParseNLP(userMsg);
+                    ArrayList<String> words = parseNLP.getWords();
+                    for(String word : words) {
+                        if(library.byTitle(word).getTitle() == word) {
+                            cbMsg = "Added " + word + " to cart";
+                            continue;
+                        }
+                        else {
+                            cbMsg = "Sorry, we don't have that one";
+                            continue;
+                        }
+                    }
                 }
-                System.out.println("Thank you for using this service, would you like to continue browsing or exit?");
                 if (!chatBot.testReaction(userMsg)) {
-                    objective = "exit";
-                    innerRun = false;
-                    outterRun = false;
+
+                    cbMsg = "What is the title of the book you want?";
+                    getCBM(cbMsg);
+                    getUserIN();
+
+                    boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
+                    if (yes) {
+                        objective = request;
+                        break;
+                    } else {
+                        continue;
+                    }
                 }
+            }
+            cbMsg = "Thank you for using this service, would you like to continue browsing?";
+            getCBM(cbMsg);
+            getUserIN();
+            boolean yes = chatBot.testReaction(userMsg); //can pass string here instead
+            if (yes) {
+                innerRun = true;
+                outterRun = true;
+                continue;
+            } else {
+                innerRun = false;
+                outterRun = false;
+                break;
+
             }
         }
     }
