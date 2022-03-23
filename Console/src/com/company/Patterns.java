@@ -83,7 +83,7 @@ public String getTrivia(String sentence) {
   String response = sentence;
 
   if (findKeyword(response, "quiz") >= 0 || findKeyword(response, "test") >= 0 ||
-          findKeyword(response, "tst") >= 0) {
+          findKeyword(response, "tst") >= 0  || findKeyword(response, "trivia") >= 0 || findKeyword(response, "game")>= 0) {
     response = "";trivia.play();
   }
   return response;
