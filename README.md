@@ -1,7 +1,7 @@
 # Assignment3
 Part 2 of chat bot:
 
-#[Table of Contents]
+# [Table of Contents]
 
 Description
 Getting Started
