@@ -14,7 +14,7 @@ Part 2 of chat bot:
 
 ## Description
 Book, movie and trivia chat bot
-![image]![image](https://user-images.githubusercontent.com/60250054/157779181-1be28460-d13c-4ca5-a3ae-db72b4f99fb8.png)
+![image](https://user-images.githubusercontent.com/60250054/157779181-1be28460-d13c-4ca5-a3ae-db72b4f99fb8.png)
 
 Chat bot for online library book suggestion, 
 console based: 
@@ -26,6 +26,9 @@ https://github.com/COSC-310-Team-27/Assignment2/tree/main/ChatBotMobile
 browser(WIP): 
 https://github.com/COSC-310-Team-27/Assignment2/tree/main/ChatBotHTML
 
+final release: 
+https://github.com/COSC-310-Team-27/Assignment3/tree/main/ChatBotSwing
+
 Bot intelligently responds to natural language input and suggests generas based on 
 Principle Component Analysis: 
 https://github.com/COSC-310-Team-27/Assignment2/blob/main/Python_PCA/PCA_encode_decode.ipynb
@@ -34,6 +37,9 @@ https://github.com/COSC-310-Team-27/Assignment2/blob/main/Console/src/com/compan
 and a number of other features found in the console folder. For those who are more adventurous could partake in a quiz that will be more competitive in part 2.
 
 ## Getting Started
+1. Pull repository or just the chatbotswing directory in main branch. 
+2. If you're on Intellij, create a new maven project.
+3. Copy and paste src from repository to project src folder, copy and paste pom.xml from repository to project pom.xml.
 
 ### Dependencies
 
@@ -81,13 +87,13 @@ parse is a class of methods that finds a certain required key element of the inp
 Contains the title, author, number of pages, genre of a book. 
 
 ### Installing
+After following the steps in getting started section, there should be a symbol(notably small) in the top right of your coding space, suggesting a sync to install dependencies based on the pom.xml, click it. 
 
 run java.Main()
 
-exe or appliication TBA
 ### Executing program
 
-
+After dependencies are installed, run GUI.java.
              
 Bot will prompt user with generic questions to setup a user profile. After which user can choose from a number of features to checkout books. 
 Through the main class, users can invoke features such as: 
@@ -114,7 +120,7 @@ List of limitations (Work in progress)
 
 Contributors names and student numbers
 
-Joel Johnson 
+Joel Johnson (37794112)
 Mahir Rahman (71811509)
 Matthew Halim (12588786)
 Nikita Korobkin (13290333)
