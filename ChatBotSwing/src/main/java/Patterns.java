@@ -5,72 +5,6 @@ public class Patterns {
   Scanner sc = new Scanner(System.in);
   //ChatBot chatBot = new ChatBot();
   Person user1 = new Person();
-  Trivia trivia = new Trivia();
-
-  public String getTrivia(String sentence) {
-    String response = sentence;
-
-    if (findKeyword(response, "quiz") >= 0 || findKeyword(response, "test") >= 0 ||
-            findKeyword(response, "tst") >= 0  || findKeyword(response, "trivia") >= 0 || findKeyword(response, "game")>= 0) {
-      response = "";trivia.play();
-    }
-    return response;
-  }
-
-
-  public String getRobot(String sentence) {
-    String response = sentence;
-    if (findKeyword(response, "robot") >= 0 || findKeyword(response, "human") >= 0 ||
-            findKeyword(response, "bot") >= 0) {
-      response = " ,yes I am a robot, but I'm a good one.\nLet me prove it. How can I help you\n";
-    }
-    if (findKeyword(response, "joke") >= 0 || findKeyword(response, "jk") >= 0 ||
-            findKeyword(response, "laugh") >= 0) {
-      response = ", lol you're funny!\n";
-    }
-    if (findKeyword(response, "annoying") >= 0 || findKeyword(response, "suck") >= 0 ||
-            findKeyword(response, "boring")>= 0 || findKeyword(response, "bad") >= 0)  {
-      response = ", I'm sorry you feel that way!\n";
-    }
-    if (findKeyword(response, "annoying") >= 0 || findKeyword(response, "suck") >= 0 ||
-            findKeyword(response, "boring")>= 0 || findKeyword(response, "bad") >= 0)  {
-      response = ", I'm sorry you feel that way!\n";
-    }
-    if (findKeyword(response, "who made you") >= 0 || findKeyword(response, "your maker") >= 0 )  {
-      response = "Group 27, enrolled in COSC 310!\n";
-    }
-    if (findKeyword(response, "language") >= 0 || findKeyword(response, "speak") >= 0 )  {
-      response = "The only language I speak is english\n";
-    }
-    if (findKeyword(response, "weather") >= 0 || findKeyword(response, "rainy") >= 0 )  {
-      response = "Its beautiful at the moment. Nice and Sunny\n";
-    }
-    if (findKeyword(response, "how are you") >= 0)  {
-      response = "I'm having a great day so far!\nI like to feel useful, tell me what I can do for you\n";
-    }
-    if (findKeyword(response, "where is your store") >= 0)  {
-      response = "The store is currently virtual!\nThere Will be an update when we have more information\n";
-    }
-    if (findKeyword(response, "I wish I could tell you") >= 0) {
-      response = "how awesome things are about to be for you!\n";
-    }
-
-    return response;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*
 
   public String getWelcome(){
     return "Hello I'm ChatBot!\nWhat is your name?";
@@ -137,7 +71,7 @@ public class Patterns {
     System.out.print("");
     return false;
   }
-
+     /*
       int max = 3;
       int randNum = (int)(Math.random() * max);
       return switch (randNum) {
@@ -164,7 +98,7 @@ public class Patterns {
     }else response = getRandomResponse() + "\n Please try again!";
     return "Oops! Looks like you typed in a genre that is either:\n1.No longer in stock unavailable genre\nor\n2.Not in our inventory" + response;
   }
-
+*/
 
 
 
@@ -204,7 +138,7 @@ public class Patterns {
     };
     }
 
-
+/*
 This method is used to convert all letters withing a given word/phase to lowercase.
 It checks a keyword is not being recognized as a sub string of another keyword.
 eg. 'ok' being recognized in place of 'took'

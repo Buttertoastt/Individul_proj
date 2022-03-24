@@ -17,6 +17,7 @@ public class ChatBot {
 	private ArrayList<String> positiveFeedBack = new ArrayList<>();
 	private Person person;
 	private ArrayList<String> statements = new ArrayList<>();
+	String reply;
 	public ChatBot(){
 		statements.add("Hello, my name is Haro your personal entertainment assistant"); //0
 		statements.add("I would recommend the following book(s): "); //1
@@ -47,9 +48,7 @@ public class ChatBot {
 
 	//.next usage noted
 	//PCA loop until user picks a book.
-	public void loopGeneraTitle(Person person,PCA pca, ArrayList<String> suggest, boolean last) {
-
-		Scanner sc = new Scanner(System.in);
+	public void loopGeneraTitle(Person person,PCA pca, ArrayList<String> suggest, boolean last) throws InterruptedException {
 		boolean happy = false;
 		boolean addToCart = false;
 		boolean continueBrowsing = false;
@@ -59,27 +58,34 @@ public class ChatBot {
 				return;
 			}
 			getConsolation(loopNum);
-			System.out.println("Would you like to browse something in our ");
-			System.out.println(s + " section?");
-			String reply = sc.next();
+			GUI.cbMsg = "Would you like to browse something in our "+s + " section?";
+			GUI.getCBM(GUI.cbMsg);
+			GUI.getUserIN();
+			reply = GUI.userMsg;
 			happy = testReaction(reply);
 			if(happy) {
-				System.out.println("That's great!");
+				GUI.cbMsg = "That's great";
+				GUI.getCBM(GUI.cbMsg);
 				ArrayList<String> titles = library.getTitleList(library.getGeneraList(s));
 				for (String t:titles) {
-					System.out.println("Can i suggest: ");
-					System.out.println(t + "?");
-					String reply2 = sc.next();
-					addToCart = testReaction(reply2);
+					GUI.cbMsg = "Can i suggest: "+t+ " ?";
+					GUI.getCBM(GUI.cbMsg);
+					GUI.getUserIN();
+					GUI.getUserIN();
+					reply = GUI.userMsg;
+					addToCart = testReaction(reply);
 					if(addToCart) {
 						person.updateTempBookList(library.byTitle(t));
-						System.out.println("Added the book: " + t + " to checkout list");
-						addToCart = false;
-						System.out.println("continue browsing?");
-						String reply3 = sc.next();
-						continueBrowsing = testReaction(reply3);
+						GUI.cbMsg = "Added the book: " + t + " to checkout list. \n Continue browsing?";
+						GUI.getCBM(GUI.cbMsg);
+						GUI.getUserIN();
+						reply = GUI.userMsg;
+						continueBrowsing = testReaction(reply);
 						if(!continueBrowsing) {
 							return;
+						}
+						else {
+							continue;
 						}
 					}
 				}
@@ -87,7 +93,7 @@ public class ChatBot {
 			loopNum++;
 		}
 	}
-	public void loopGeneraTitleMovie(Person person, PCA pca, ArrayList<String> suggest, boolean last) {
+	public void loopGeneraTitleMovie(Person person, PCA pca, ArrayList<String> suggest, boolean last) throws InterruptedException {
 
 		Scanner sc = new Scanner(System.in);
 		boolean happy = false;
@@ -98,81 +104,67 @@ public class ChatBot {
 			if(loopNum>suggest.size()) {
 				return;
 			}
-			getConsolation(loopNum);
-			System.out.println("Would you like to browse something in our ");
-			System.out.println(s + " section?");
-			String reply = sc.next();
+			GUI.cbMsg = "Would you like to browse something in our "+s + " section?";
+			GUI.getCBM(GUI.cbMsg);
+			GUI.getUserIN();
+			reply = GUI.userMsg;
 			happy = testReaction(reply);
 			if(happy) {
-				System.out.println("That's great!");
+				GUI.cbMsg = "Thats great";
+				GUI.getCBM(GUI.cbMsg);
 				ArrayList<String> titles = gallery.getTitleList(gallery.getGeneraList(s));
-				for (String t:titles) {
-					System.out.println("Can i suggest: ");
-					System.out.println(t + "?");
-					String reply2 = sc.next();
-					addToCart = testReaction(reply2);
+				for (String m:titles) {
+					GUI.cbMsg = "Can i suggest: "+m+ " ?";
+					GUI.getCBM(GUI.cbMsg);
+					GUI.getUserIN();
+					GUI.getUserIN();
+					reply = GUI.userMsg;
+					addToCart = testReaction(reply);
 					if(addToCart) {
-						//person.checkOut.add(library.byTitle(t)); doesn't update tempList
-						person.updateTempMovieList(gallery.byTitle(t));
-						System.out.println("Added the movie: " + t + " to checkout list");
-						addToCart = false;
-						System.out.println("Continue browsing?");
-						String reply3 = sc.next();
-						continueBrowsing = testReaction(reply3);
+						person.updateTempMovieList(gallery.byTitle(m));
+						GUI.cbMsg = "Added the movie: " + m + " to checkout list. \n Continue browsing?";
+						GUI.getCBM(GUI.cbMsg);
+						GUI.getUserIN();
+						reply = GUI.userMsg;
+						continueBrowsing = testReaction(reply);
 						if(!continueBrowsing) {
 							return;
+						}
+						else {
+							continue;
 						}
 					}
 				}
 			}
 			loopNum++;
 		}
-		if(!happy) {
-			getConsolation(loopNum);
-			System.out.println("unhappy");
-			ArrayList<String> finalOption = pca.remainingOptions(person.getTopThree());
-			loopGeneraTitle(person,pca,finalOption,true);
 
-		}
 	}
 
 
-	public void getConsolation(int loopNum) {
+	public String getConsolation(int loopNum) {
+		String consolation = " ";
 		switch (loopNum) {
 			case(1): {
-				System.out.println("Searching...");
+				consolation = "Searching...";
 				break;
 			}
 			case(2): {
-				System.out.println("Ok, Searching...");
+				consolation = "Ok, Searching...";
 				break;
 			}
 			case(3): {
-				System.out.println("Ok, lets try, Searching...");
+				consolation = "Ok, lets try, Searching...";
 				break;
 			}
 			default: {
-				System.out.println("Searching...");
+				consolation = "Searching";
 			}
-		}
-
-
-	}
-
-	public String getStatement(int i,String s) {
-		String q = "";
-
-		if (statements.size() >i ) {
-			q = statements.get(i).toString();
-			if (q.contains("%s")) {
-				q = String.format(q,s);
-			}
-			return q;
 
 		}
-		else
-			return "I can't think of anything else";
+		return consolation;
 	}
+
 	public String getStatement(int i) {
 		String q = "";
 
@@ -188,18 +180,11 @@ public class ChatBot {
 			return "I can't think of anything else";
 	}
 
-
-
-
 	private ArrayList<Person> people = new ArrayList<>();
 
 	public String askByName(String question, String name) {
 		String out = String.format(question,name);
 		return out;
-	}
-
-	public ArrayList<Person> getPeople() {
-		return people;
 	}
 
 }

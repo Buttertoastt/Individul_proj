@@ -88,4 +88,15 @@ public class ParseNLP {
         return sentiment;
     }
 
+    public ArrayList<String> getSentimentList() {
+        ArrayList<String> sentiments = new ArrayList<>();
+        String sentiment = "Neutral";
+        getSentences();
+        for(CoreSentence sentence: sentenceList) {
+            sentiment = sentence.sentiment();
+            sentiments.add(sentiment);
+        }
+        return sentiments;
+    }
+
 }

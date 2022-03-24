@@ -1,5 +1,7 @@
 import java.util.*;
 
+import static java.lang.Integer.*;
+
 public class Trivia {
     public ArrayList<TriviaQuestion> TriviaQuestionsSet;
     public Trivia(){
@@ -41,30 +43,31 @@ public class Trivia {
         Collections.shuffle(TriviaQuestionsSet, new Random());
     }
 
-    public void play(){
-        Scanner sc = new Scanner(System.in);
+    public void play() throws InterruptedException {
         int score = 0;
         //Question generation
         for (int question =0; question<5; question++){
-            System.out.println(TriviaQuestionsSet.get(question).getTriviaQuestion());
+            GUI.cbMsg = TriviaQuestionsSet.get(question).getTriviaQuestion();
+            GUI.getCBM(GUI.cbMsg);
             int numOptions = TriviaQuestionsSet.get(question).getOptions().size();
 
             //Show options available for each question
             for(int option= 0; option < numOptions; option++){
-                System.out.println((option + 1)+": "+ TriviaQuestionsSet.get(question).getOptions().get(option));
+                GUI.cbMsg = (option + 1)+": "+ TriviaQuestionsSet.get(question).getOptions().get(option);
+                GUI.getCBM(GUI.cbMsg);
             }
-            int userChoice = sc.nextInt();
-            ArrayList<String> optionSet =
-                    TriviaQuestionsSet.get(question).getOptions();
+            GUI.getUserIN();
+            String reply = GUI.userMsg;
+            ArrayList<String> optionSet = TriviaQuestionsSet.get(question).getOptions();
             String correctOption = TriviaQuestionsSet.get(question).getAnswer();
             int correctOptionIndex = optionSet.indexOf(correctOption);
-            if (userChoice == correctOptionIndex+1){
+            if (String.valueOf(correctOptionIndex + 1).contains(reply.trim())){
                 score++;
             }
         }
-        //sc.close();
-        System.out.println("You scored: " + score + "/5\n");
-        //System.out.println("To retry the quiz reply: quiz, test me\nTo get book recommendations reply, recommendation, rec, book\n");
+        GUI.cbMsg = "You scored: " + score + "/5\n";
+        GUI.getCBM(GUI.cbMsg);
+
     }
 
 }

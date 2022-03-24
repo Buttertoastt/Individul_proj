@@ -15,7 +15,7 @@ public class TriviaQuestion {
             this.options.add(options[i]);
         }
         //Shuffling questions
-        Collections.shuffle(this.options);
+        //Collections.shuffle(this.options);
         this.answer = answer;
     }
     public String getTriviaQuestion(){
