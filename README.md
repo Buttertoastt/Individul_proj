@@ -118,13 +118,13 @@ List of limitations (Work in progress)
 
 ## Authors
 
-Contributors names and student numbers
+Contributors names and student numbers:
 
-Joel Johnson (37794112)
-Mahir Rahman (71811509)
-Matthew Halim (12588786)
-Nikita Korobkin (13290333)
-Richardo Brown (10142529)
+<br />Joel Johnson (37794112)
+<br />Mahir Rahman (71811509)
+<br />Matthew Halim (12588786)
+<br />Nikita Korobkin (13290333)
+<br />Richardo Brown (10142529)
 
 
 ## Version History
