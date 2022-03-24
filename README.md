@@ -4,13 +4,13 @@ Part 2 of chat bot:
 # [Table of Contents]
 
 Description
-Getting Started
-Dependencies
-Installing
-Help
-Authors
-Version History
-Acknowledgments
+<br />Getting Started
+<br />Dependencies
+<br />Installing
+<br />Help
+<br />Authors
+<br />Version History
+<br />Acknowledgments
 
 ## Description
 Book, movie and trivia chat bot
