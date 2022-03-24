@@ -1,4 +1,6 @@
-import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 /**
  * Stemmer, implementing the Porter Stemming Algorithm
@@ -82,7 +84,6 @@ class Stemmer
    /* m() measures the number of consonant sequences between 0 and j. if c is
       a consonant sequence and v a vowel sequence, and <..> indicates arbitrary
       presence,
-
          <c><v>       gives 0
          <c>vc<v>     gives 1
          <c>vcvc<v>   gives 2
@@ -133,10 +134,8 @@ class Stemmer
    /* cvc(i) is true <=> i-2,i-1,i has the form consonant - vowel - consonant
       and also if the second c is not w,x or y. this is used when trying to
       restore an e at the end of a short word. e.g.
-
          cav(e), lov(e), hop(e), crim(e), but
          snow, box, tray.
-
    */
 
     private final boolean cvc(int i)
@@ -171,25 +170,20 @@ class Stemmer
     private final void r(String s) { if (m() > 0) setto(s); }
 
    /* step1() gets rid of plurals and -ed or -ing. e.g.
-
           caresses  ->  caress
           ponies    ->  poni
           ties      ->  ti
           caress    ->  caress
           cats      ->  cat
-
           feed      ->  feed
           agreed    ->  agree
           disabled  ->  disable
-
           matting   ->  mat
           mating    ->  mate
           meeting   ->  meet
           milling   ->  mill
           messing   ->  mess
-
           meetings  ->  meet
-
    */
 
     private final void step1()
@@ -324,6 +318,40 @@ class Stemmer
         i_end = k+1; i = 0;
     }
 
+    // check for Input string in chatbot category with stemming.
+
+    public String checkSpelling(String input, String stemmedOutput) {
+        ArrayList<String> inputStore = new ArrayList<>();
+        for(int j =0; j<input.length()-1; j++) {
+            if(input.charAt(j) == ' ') {
+                String StemInput = input.substring(0, j);
+                input = input.substring(j+1);
+                inputStore.add(StemInput.toLowerCase());
+                j = 0;
+            }
+
+            if(!input.contains(" ")) {
+                inputStore.add(input);
+                break;
+            }
+        }
+
+
+
+        String result = " ";
+        for(String s: inputStore) {
+            System.out.println(s);
+            add(s.toCharArray(), s.length());
+            stem();
+            s = toString();
+            if(s.contains(stemmedOutput)) {
+                result = s;
+            }
+        }
+
+        return result;
+    }
+
     /** Test program for demonstrating the Stemmer.  It reads text from a
      * a list of files, stems each word, and writes the result to standard
      * output. Note that the word stemmed is expected to be in lower case:
@@ -332,60 +360,25 @@ class Stemmer
      */
     public static void main(String[] args)
     {
-        char[] w = new char[501];
-        Stemmer s = new Stemmer();
-        for (int i = 0; i < args.length; i++)
-            try
-            {
-                FileInputStream in = new FileInputStream(args[i]);
+        Stemmer inputStem = new Stemmer();
+        Stemmer outputStem = new Stemmer();
 
-                try
-                { while(true)
+        System.out.println("User Input: ");
 
-                {  int ch = in.read();
-                    if (Character.isLetter((char) ch))
-                    {
-                        int j = 0;
-                        while(true)
-                        {  ch = Character.toLowerCase((char) ch);
-                            w[j] = (char) ch;
-                            if (j < 500) j++;
-                            ch = in.read();
-                            if (!Character.isLetter((char) ch))
-                            {
-                                /* to test add(char ch) */
-                                for (int c = 0; c < j; c++) s.add(w[c]);
+        // provide a stemmmed output or use stemmer class to stemm output before stemchecking
 
-                                /* or, to test add(char[] w, int j) */
-                                /* s.add(w, j); */
+        String output = "movies";
+        System.out.println("chatbot category = movies");
+        Scanner x = new Scanner(System.in);
 
-                                s.stem();
-                                {  String u;
+        String input = x.nextLine();
 
-                                    /* and now, to test toString() : */
-                                    u = s.toString();
+        outputStem.add(output.toCharArray(), output.length());
+        outputStem.stem();
+        System.out.println("checking for stem " + outputStem.toString());
+        String stemmedOutput = outputStem.toString();
 
-                                    /* to test getResultBuffer(), getResultLength() : */
-                                    /* u = new String(s.getResultBuffer(), 0, s.getResultLength()); */
+        System.out.println("Stem has been found! Stem retrieved from input = " + inputStem.checkSpelling(input, stemmedOutput));
 
-                                    System.out.print(u);
-                                }
-                                break;
-                            }
-                        }
-                    }
-                    if (ch < 0) break;
-                    System.out.print((char)ch);
-                }
-                }
-                catch (IOException e)
-                {  System.out.println("error reading " + args[i]);
-                    break;
-                }
-            }
-            catch (FileNotFoundException e)
-            {  System.out.println("file " + args[i] + " not found");
-                break;
-            }
     }
 }
