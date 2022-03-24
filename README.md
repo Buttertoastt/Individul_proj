@@ -1,20 +1,20 @@
 # Assignment3
 Part 2 of chat bot:
 
-[Table of Contents]
+#[Table of Contents]
 
-# Description
-# Getting Started
-# Dependencies
-# Installing
-# Help
-# Authors
-# Version History
-# Acknowledgments
+Description
+Getting Started
+Dependencies
+Installing
+Help
+Authors
+Version History
+Acknowledgments
 
 ## Description
 Book, movie and trivia chat bot
-![image](https://user-images.githubusercontent.com/60250054/157779181-1be28460-d13c-4ca5-a3ae-db72b4f99fb8.png)
+![image](https://github.com/COSC-310-Team-27/Assignment3/blob/main/resources/COSC310%20A3%20Flow-chart.png)
 
 Chat bot for online library book suggestion, 
 console based: 
@@ -144,3 +144,4 @@ Inspiration, code snippets, etc.
 * [zenorocha](https://gist.github.com/zenorocha/4526327)
 * [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
 * [DomPizzie](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc)
+* [Porter Stemmer algorithm](https://tartarus.org/martin/PorterStemmer/)
