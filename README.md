@@ -42,12 +42,12 @@ and a number of other features found in the console folder. For those who are mo
 3. Copy and paste src from repository to project src folder, copy and paste pom.xml from repository to project pom.xml.
 
 ### Dependencies
-pom.xml 
-  edu.stanford.nlp
-  org.slf4j
-  junit
-  org.testng
-  org.apache.opennlp
+pom.xml:
+  edu.stanford.nlp,
+  org.slf4j,
+  junit,
+  org.testng,
+  org.apache.opennlp,
   
 java dependencies (libraries installed using maven):
 import org.apache.commons.math3.linear.*;
