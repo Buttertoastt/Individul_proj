@@ -1,5 +1,5 @@
-# Assignment3
-Part 2 of chat bot:
+# Individual Assignment
+Part 4 of chat bot:
 
 # [Table of Contents]
 
@@ -30,6 +30,7 @@ Version2:
 https://github.com/COSC-310-Team-27/Assignment3/tree/main/ChatBotSwing
 
 Final Release
+https://github.com/Buttertoastt/Individul_proj.git
 
 Bot intelligently responds to natural language input and suggests generas based on 
 Principle Component Analysis: 
