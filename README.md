@@ -13,7 +13,7 @@ Description
 <br />Acknowledgments
 
 ## Description
-Book, movie and trivia chat bot
+Book, movie and trivia chat bot (now understands spanish)
 ![image](https://github.com/COSC-310-Team-27/Assignment3/blob/main/resources/COSC310%20A3%20Flow-chart.png)
 
 Chat bot for online library book suggestion, 
@@ -26,8 +26,10 @@ https://github.com/COSC-310-Team-27/Assignment2/tree/main/ChatBotMobile
 browser(WIP): 
 https://github.com/COSC-310-Team-27/Assignment2/tree/main/ChatBotHTML
 
-final release: 
+Version2: 
 https://github.com/COSC-310-Team-27/Assignment3/tree/main/ChatBotSwing
+
+Final Release
 
 Bot intelligently responds to natural language input and suggests generas based on 
 Principle Component Analysis: 
@@ -48,18 +50,52 @@ pom.xml:
   junit,
   org.testng,
   org.apache.opennlp,
+  spring-boot-starter,
+  spring-boot-starter-test,
+  spring-boot-starter-web,
+  spring-boot-starter-json,
+  spring-boot-maven-plugin,
+  com.googlecode.json-simple,
+  google-cloud-translate
+  
   
 java dependencies (libraries installed using maven):
 import org.apache.commons.math3.linear.*;
 import org.apache.commons.math3.stat.correlation.Covariance;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParse
 
 python dependencies (pip install via console):
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from autograd import grad 
+from autograd import grad
 
-### Class structure
+jar file dependencies
+guava-22.0
+jsoup-1.14.3
+
+
+#### Class structure
+
+### APIs
+Wikipedia API
+Google Translate API
+
+<b><u> Wikipedia API classes</u></b>
+
+## WikiAPI.java
+This class handles the search for articles relating to a category specified by the user and retreives the articles 
+
+## Page.java
+This class retrieves the title, url, specifies id, and the count of words in each article.
+
+<b><u>Google API class</u></b>
+
+## GoogleTranslateAPI.java
+This java class makes use of the google api and accesses the service using a personal generated API key. Which allows the application to get and post statements submited by the user. To make use of the API other classes instantiates this class to ensure all user input is translated. 
+
 ## main.java
 Handles user input and bot outputs
 
@@ -124,20 +160,18 @@ List of limitations (Work in progress)
 
 ## Authors
 
-Contributors names and student numbers:
-
-<br />Joel Johnson (37794112)
-<br />Mahir Rahman (71811509)
-<br />Matthew Halim (12588786)
-<br />Nikita Korobkin (13290333)
 <br />Richardo Brown (10142529)
 
 
 ## Version History
-
+* 0.3
+    * User sentiment identification
+    * GUI improvements
+    * Natural Language Processing Kits
+    * See [commit change]() or See [release history]()
 * 0.2
     * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
+    
 * 0.1
     * Initial Release
 
