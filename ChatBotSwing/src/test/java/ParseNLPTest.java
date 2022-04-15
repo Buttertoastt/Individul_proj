@@ -1,5 +1,5 @@
+import com.chatbot.ok.ParseNLP;
 import edu.stanford.nlp.pipeline.CoreSentence;
-import edu.stanford.nlp.simple.Sentence;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

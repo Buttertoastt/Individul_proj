@@ -1,5 +1,5 @@
+import com.chatbot.ok.ChatBot;
 import junit.framework.TestCase;
-import org.testng.annotations.Test;
 
 public class ChatBotTest extends TestCase {
 
