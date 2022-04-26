@@ -13,7 +13,7 @@ public class GoogleTranslateAPI {
         //String api_key="";
 
         // Load the API key
-        String api_key = "AIzaSyBj9KrPjoc8JHd2Qv9VykOUiVOqJ-k4PKs";
+        String api_key = "api-key-here";
 
         // Prepare HTTP connection
         String url = "https://translation.googleapis.com/language/translate/v2?key=" + api_key;
